@@ -17,13 +17,19 @@ const { title } = Astro.props;
     <meta name="generator" content={Astro.generator} />
 
     <!-- OGP -->
-    <meta name="twitter:card" content="summary_large_image" />
     <meta property="og:title" content={title} />
-    <meta property="og:description" content="Takafumi Miyanaga's portfolio site" />
-    <meta property="og:url" content="https://www.orangekame3.net/" />
-    <meta property="og:site_name" content={title} />
+    <meta property="og:description" content="Software Developer & Researcher" />
+    <meta property="og:url" content="https://orangekame3.github.io/" />
+    <meta property="og:site_name" content="orangekame3" />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://github.com/orangekame3/orangekame3.github.io/blob/master/public/orangekame3.jpg?raw=true" />
+    <meta property="og:image" content="https://orangekame3.github.io/orangekame3.jpg" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@orangekame3" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content="Software Developer & Researcher" />
+    <meta name="twitter:image" content="https://orangekame3.github.io/orangekame3.jpg" />
 
     <title>{title}</title>
 
