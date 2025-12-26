@@ -1,0 +1,22 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ProfileCard from '../components/ProfileCard.astro';
+import Timeline from '../components/Timeline.astro';
+import Publication from '../components/Publication.astro';
+import OSS from '../components/OSS.astro';
+---
+
+<Layout title="Takafumi Miyanaga">
+  <Header />
+
+  <main class="max-w-xl mx-auto px-6">
+    <ProfileCard />
+    <Timeline />
+    <Publication />
+    <OSS />
+  </main>
+
+  <Footer />
+</Layout>

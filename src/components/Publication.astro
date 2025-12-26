@@ -1,0 +1,47 @@
+---
+const publications = [
+  {
+    title: 'Software Mistakes and Tradeoffs',
+    note: 'Translation',
+    year: '2023',
+    link: 'https://www.oreilly.co.jp/books/9784814400317/',
+  },
+  {
+    title: 'Ultrastrong Tunable Coupler Between Superconducting LC Resonators',
+    note: 'Phys. Rev. Applied',
+    year: '2021',
+    link: 'https://journals.aps.org/prapplied/abstract/10.1103/PhysRevApplied.16.064041',
+  },
+];
+---
+
+<section class="py-16">
+  <h2 class="text-sm uppercase tracking-widest text-center mb-12" style="color: var(--text-tertiary); letter-spacing: 0.15em;">
+    Publications
+  </h2>
+
+  <div class="space-y-5">
+    {publications.map((pub) => (
+      <a
+        href={pub.link}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="block group"
+      >
+        <div class="flex justify-between items-baseline gap-4">
+          <div class="min-w-0">
+            <h3 class="text-base font-medium truncate group-hover:opacity-60 transition-opacity" style="color: var(--text-primary);">
+              {pub.title}
+            </h3>
+            <p class="text-sm mt-1" style="color: var(--text-tertiary);">
+              {pub.note}
+            </p>
+          </div>
+          <span class="text-sm shrink-0 tabular-nums" style="color: var(--text-tertiary);">
+            {pub.year}
+          </span>
+        </div>
+      </a>
+    ))}
+  </div>
+</section>

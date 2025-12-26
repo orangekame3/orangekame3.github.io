@@ -1,0 +1,48 @@
+---
+const projects = [
+  {
+    title: 'tftarget',
+    description: 'Interactive Terraform target selector',
+    link: 'https://github.com/future-architect/tftarget',
+  },
+  {
+    title: 'paclear',
+    description: 'Terminal clear with PAC-MAN animation',
+    link: 'https://github.com/orangekame3/paclear',
+  },
+  {
+    title: 'stree',
+    description: 'S3 bucket directory tree visualization',
+    link: 'https://github.com/orangekame3/stree',
+  },
+  {
+    title: 'ghfetch',
+    description: 'GitHub profile fetcher',
+    link: 'https://github.com/orangekame3/ghfetch',
+  },
+];
+---
+
+<section class="py-16">
+  <h2 class="text-sm uppercase tracking-widest text-center mb-12" style="color: var(--text-tertiary); letter-spacing: 0.15em;">
+    Projects
+  </h2>
+
+  <div class="grid grid-cols-2 gap-x-10 gap-y-6">
+    {projects.map((project) => (
+      <a
+        href={project.link}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="block group"
+      >
+        <h3 class="text-base font-medium group-hover:opacity-60 transition-opacity" style="color: var(--text-primary);">
+          {project.title}
+        </h3>
+        <p class="text-sm mt-1" style="color: var(--text-tertiary);">
+          {project.description}
+        </p>
+      </a>
+    ))}
+  </div>
+</section>
