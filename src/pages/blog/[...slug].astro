@@ -33,13 +33,10 @@ const formatDate = (date: Date) => {
     <!-- Back link -->
     <a
       href="/blog"
-      class="inline-flex items-center gap-2 text-xs sm:text-sm mb-8 sm:mb-12 opacity-60 hover:opacity-100 transition-opacity"
+      class="inline-block text-xs sm:text-sm mb-8 sm:mb-12 opacity-60 hover:opacity-100 transition-opacity"
       style="color: var(--text-primary);"
     >
-      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
-      </svg>
-      Back
+      ← back
     </a>
 
     <article>
@@ -119,13 +116,14 @@ const formatDate = (date: Date) => {
   }
 
   .prose a {
-    color: var(--text-primary);
+    color: var(--accent);
     text-decoration: underline;
     text-underline-offset: 2px;
   }
 
   .prose a:hover {
-    opacity: 0.6;
+    color: var(--accent-secondary);
+    opacity: 1;
   }
 
   .prose ul, .prose ol {
@@ -198,7 +196,7 @@ const formatDate = (date: Date) => {
   }
 
   .prose blockquote {
-    border-left: 2px solid var(--border-color);
+    border-left: 2px solid var(--accent);
     padding-left: 0.75rem;
     margin-bottom: 1rem;
     color: var(--text-tertiary);

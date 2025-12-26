@@ -7,6 +7,12 @@ export interface Publication {
 
 export const publications: Publication[] = [
   {
+    title: 'A Practical Open-Source Software Stack for a Cloud-Based Quantum Computing System',
+    note: 'IEEE QCE',
+    year: '2025',
+    link: 'https://ieeexplore.ieee.org/document/11250353',
+  },
+  {
     title: 'Software Mistakes and Tradeoffs',
     note: 'Translation',
     year: '2023',
