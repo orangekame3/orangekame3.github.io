@@ -1,26 +1,13 @@
 ---
-const publications = [
-  {
-    title: 'Software Mistakes and Tradeoffs',
-    note: 'Translation',
-    year: '2023',
-    link: 'https://www.oreilly.co.jp/books/9784814400317/',
-  },
-  {
-    title: 'Ultrastrong Tunable Coupler Between Superconducting LC Resonators',
-    note: 'Phys. Rev. Applied',
-    year: '2021',
-    link: 'https://journals.aps.org/prapplied/abstract/10.1103/PhysRevApplied.16.064041',
-  },
-];
+import { publications } from '../data/publications';
 ---
 
-<section class="py-16">
-  <h2 class="text-sm uppercase tracking-widest text-center mb-12" style="color: var(--text-tertiary); letter-spacing: 0.15em;">
+<section class="py-12 sm:py-16">
+  <h2 class="text-xs sm:text-sm uppercase tracking-widest text-center mb-8 sm:mb-12" style="color: var(--text-tertiary); letter-spacing: 0.15em;">
     Publications
   </h2>
 
-  <div class="space-y-5">
+  <div class="space-y-4 sm:space-y-5">
     {publications.map((pub) => (
       <a
         href={pub.link}
@@ -28,16 +15,16 @@ const publications = [
         rel="noopener noreferrer"
         class="block group"
       >
-        <div class="flex justify-between items-baseline gap-4">
+        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1 sm:gap-4">
           <div class="min-w-0">
-            <h3 class="text-base font-medium truncate group-hover:opacity-60 transition-opacity" style="color: var(--text-primary);">
+            <h3 class="text-sm sm:text-base font-medium group-hover:opacity-60 transition-opacity line-clamp-2 sm:truncate" style="color: var(--text-primary);">
               {pub.title}
             </h3>
-            <p class="text-sm mt-1" style="color: var(--text-tertiary);">
+            <p class="text-xs sm:text-sm mt-0.5 sm:mt-1" style="color: var(--text-tertiary);">
               {pub.note}
             </p>
           </div>
-          <span class="text-sm shrink-0 tabular-nums" style="color: var(--text-tertiary);">
+          <span class="text-xs sm:text-sm shrink-0 tabular-nums" style="color: var(--text-tertiary);">
             {pub.year}
           </span>
         </div>

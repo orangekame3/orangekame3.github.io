@@ -1,41 +1,39 @@
 ---
 import SocialIcons from './SocialIcons.astro';
+import { profile } from '../data/profile';
 ---
 
-<section class="py-20 md:py-32">
+<section class="py-12 sm:py-20 md:py-32">
   <div class="flex flex-col items-center text-center">
     <!-- Avatar -->
-    <div class="mb-10">
+    <div class="mb-8 sm:mb-10">
       <img
-        src="/profile.jpg"
-        alt="Takafumi Miyanaga"
-        class="w-28 h-28 md:w-32 md:h-32 rounded-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+        src={profile.avatar}
+        alt={profile.name}
+        class="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
         style="border: 1px solid var(--border-color);"
       />
     </div>
 
     <!-- Name -->
-    <h1 class="text-3xl md:text-4xl font-medium mb-3" style="color: var(--text-primary);">
-      Takafumi Miyanaga
+    <h1 class="text-2xl sm:text-3xl md:text-4xl font-medium mb-2 sm:mb-3" style="color: var(--text-primary);">
+      {profile.name}
     </h1>
 
     <!-- Title -->
-    <p class="text-sm uppercase tracking-widest mb-10" style="color: var(--text-tertiary); letter-spacing: 0.15em;">
-      Software Developer & Researcher
+    <p class="text-xs sm:text-sm uppercase tracking-widest mb-8 sm:mb-10" style="color: var(--text-tertiary); letter-spacing: 0.15em;">
+      {profile.title}
     </p>
 
     <!-- Bio -->
-    <div class="max-w-lg space-y-5 text-base leading-relaxed" style="color: var(--text-secondary);">
-      <p>
-        Focused on the intersection of quantum computing and cloud architecture.
-      </p>
-      <p>
-        Building systems that bridge theoretical research with practical implementation.
-      </p>
+    <div class="max-w-sm sm:max-w-md md:max-w-lg space-y-4 sm:space-y-5 text-sm sm:text-base leading-relaxed px-2" style="color: var(--text-secondary);">
+      {profile.bio.map((paragraph) => (
+        <p>{paragraph}</p>
+      ))}
     </div>
 
     <!-- Social Icons -->
-    <div class="mt-12">
+    <div class="mt-10 sm:mt-12">
       <SocialIcons />
     </div>
   </div>

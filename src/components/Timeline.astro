@@ -1,45 +1,24 @@
 ---
-const careers = [
-  {
-    title: 'Osaka Univ. QIQB',
-    role: 'Software Developer & Researcher',
-    period: '2023 — Present',
-  },
-  {
-    title: 'Future Corp.',
-    role: 'Backend Engineer & Consultant',
-    period: '2021 — 2023',
-  },
-  {
-    title: 'Tokyo University of Science',
-    role: 'M.S. Physics',
-    period: '2019 — 2021',
-  },
-  {
-    title: 'Tokyo University of Science',
-    role: 'B.S. Physics',
-    period: '2015 — 2019',
-  },
-];
+import { careers } from '../data/career';
 ---
 
-<section class="py-16">
-  <h2 class="text-sm uppercase tracking-widest text-center mb-12" style="color: var(--text-tertiary); letter-spacing: 0.15em;">
+<section class="py-12 sm:py-16">
+  <h2 class="text-xs sm:text-sm uppercase tracking-widest text-center mb-8 sm:mb-12" style="color: var(--text-tertiary); letter-spacing: 0.15em;">
     Experience
   </h2>
 
-  <div class="space-y-6">
+  <div class="space-y-5 sm:space-y-6">
     {careers.map((career) => (
-      <div class="flex justify-between items-baseline gap-4">
+      <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1 sm:gap-4">
         <div class="min-w-0">
-          <h3 class="text-base font-medium truncate" style="color: var(--text-primary);">
+          <h3 class="text-sm sm:text-base font-medium" style="color: var(--text-primary);">
             {career.title}
           </h3>
-          <p class="text-sm mt-1" style="color: var(--text-tertiary);">
+          <p class="text-xs sm:text-sm mt-0.5 sm:mt-1" style="color: var(--text-tertiary);">
             {career.role}
           </p>
         </div>
-        <span class="text-sm shrink-0 tabular-nums" style="color: var(--text-tertiary);">
+        <span class="text-xs sm:text-sm shrink-0 tabular-nums" style="color: var(--text-tertiary);">
           {career.period}
         </span>
       </div>

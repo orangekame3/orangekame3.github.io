@@ -1,0 +1,237 @@
+---
+import { type CollectionEntry, getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: post,
+  }));
+}
+
+type Props = CollectionEntry<'blog'>;
+
+const post = Astro.props;
+const { Content } = await post.render();
+
+const formatDate = (date: Date) => {
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+};
+---
+
+<Layout title={`${post.data.title} - Takafumi Miyanaga`}>
+  <Header />
+
+  <main class="max-w-xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
+    <!-- Back link -->
+    <a
+      href="/blog"
+      class="inline-flex items-center gap-2 text-xs sm:text-sm mb-8 sm:mb-12 opacity-60 hover:opacity-100 transition-opacity"
+      style="color: var(--text-primary);"
+    >
+      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+      </svg>
+      Back
+    </a>
+
+    <article>
+      <!-- Header -->
+      <header class="mb-8 sm:mb-12">
+        <time class="text-xs sm:text-sm" style="color: var(--text-tertiary);">
+          {formatDate(post.data.date)}
+        </time>
+        <h1 class="text-2xl sm:text-3xl font-medium mt-2" style="color: var(--text-primary);">
+          {post.data.title}
+        </h1>
+      </header>
+
+      <!-- Content -->
+      <div class="prose">
+        <Content />
+      </div>
+    </article>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style is:global>
+  .prose {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    font-size: 0.9375rem;
+  }
+
+  @media (min-width: 640px) {
+    .prose {
+      font-size: 1rem;
+    }
+  }
+
+  .prose h2 {
+    color: var(--text-primary);
+    font-size: 1.125rem;
+    font-weight: 500;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  @media (min-width: 640px) {
+    .prose h2 {
+      font-size: 1.25rem;
+      margin-top: 2.5rem;
+      margin-bottom: 1rem;
+    }
+  }
+
+  .prose h3 {
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-weight: 500;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .prose h3 {
+      font-size: 1.1rem;
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+    }
+  }
+
+  .prose p {
+    margin-bottom: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .prose p {
+      margin-bottom: 1.25rem;
+    }
+  }
+
+  .prose a {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .prose a:hover {
+    opacity: 0.6;
+  }
+
+  .prose ul, .prose ol {
+    margin-bottom: 1rem;
+    padding-left: 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .prose ul, .prose ol {
+      margin-bottom: 1.25rem;
+      padding-left: 1.5rem;
+    }
+  }
+
+  .prose li {
+    margin-bottom: 0.375rem;
+  }
+
+  @media (min-width: 640px) {
+    .prose li {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .prose ul li {
+    list-style-type: disc;
+  }
+
+  .prose ol li {
+    list-style-type: decimal;
+  }
+
+  .prose code {
+    background-color: var(--bg-tertiary);
+    padding: 0.15rem 0.35rem;
+    border-radius: 0.25rem;
+    font-size: 0.8125rem;
+    font-family: ui-monospace, monospace;
+  }
+
+  @media (min-width: 640px) {
+    .prose code {
+      padding: 0.2rem 0.4rem;
+      font-size: 0.875rem;
+    }
+  }
+
+  .prose pre {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    padding: 0.75rem;
+    overflow-x: auto;
+    margin-bottom: 1rem;
+    font-size: 0.8125rem;
+  }
+
+  @media (min-width: 640px) {
+    .prose pre {
+      padding: 1rem;
+      margin-bottom: 1.25rem;
+      font-size: 0.875rem;
+    }
+  }
+
+  .prose pre code {
+    background: none;
+    padding: 0;
+    font-size: inherit;
+  }
+
+  .prose blockquote {
+    border-left: 2px solid var(--border-color);
+    padding-left: 0.75rem;
+    margin-bottom: 1rem;
+    color: var(--text-tertiary);
+    font-style: italic;
+  }
+
+  @media (min-width: 640px) {
+    .prose blockquote {
+      padding-left: 1rem;
+      margin-bottom: 1.25rem;
+    }
+  }
+
+  .prose img {
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+  }
+
+  @media (min-width: 640px) {
+    .prose img {
+      margin: 1.5rem 0;
+    }
+  }
+
+  .prose hr {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: 1.5rem 0;
+  }
+
+  @media (min-width: 640px) {
+    .prose hr {
+      margin: 2rem 0;
+    }
+  }
+</style>
