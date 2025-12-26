@@ -2,6 +2,7 @@
 title: "Hello World"
 description: "This is my first blog post. Welcome to my new blog built with Astro."
 date: 2025-12-27
+lang: en
 ---
 
 Welcome to my blog. This is a sample post to demonstrate the blog functionality.

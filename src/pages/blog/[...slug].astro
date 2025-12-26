@@ -17,6 +17,12 @@ type Props = CollectionEntry<'blog'>;
 const post = Astro.props;
 const { Content } = await post.render();
 
+const allPosts = await getCollection('blog');
+const currentLang = post.data.lang;
+const baseSlug = post.slug.endsWith('-ja') ? post.slug.slice(0, -3) : post.slug;
+const altSlug = currentLang === 'en' ? `${baseSlug}-ja` : baseSlug;
+const altPost = allPosts.find((p) => p.slug === altSlug);
+
 const formatDate = (date: Date) => {
   return date.toLocaleDateString('en-US', {
     year: 'numeric',
@@ -42,10 +48,30 @@ const formatDate = (date: Date) => {
     <article>
       <!-- Header -->
       <header class="mb-8 sm:mb-12">
-        <time class="text-xs sm:text-sm" style="color: var(--text-tertiary);">
-          {formatDate(post.data.date)}
-        </time>
-        <h1 class="text-2xl sm:text-3xl font-medium mt-2" style="color: var(--text-primary);">
+        <div class="flex items-center justify-between mb-2">
+          <time class="text-xs sm:text-sm" style="color: var(--text-tertiary);">
+            {formatDate(post.data.date)}
+          </time>
+          {altPost && (
+            <div class="flex items-center rounded overflow-hidden text-xs" style="background-color: var(--bg-tertiary);">
+              <a
+                href={`/blog/${currentLang === 'en' ? post.slug : altSlug}`}
+                class={`px-2 py-1 transition-opacity ${currentLang === 'en' ? 'opacity-100' : 'opacity-40 hover:opacity-70'}`}
+                style={currentLang === 'en' ? 'background-color: var(--accent); color: var(--bg-primary);' : 'color: var(--text-secondary);'}
+              >
+                EN
+              </a>
+              <a
+                href={`/blog/${currentLang === 'ja' ? post.slug : altSlug}`}
+                class={`px-2 py-1 transition-opacity ${currentLang === 'ja' ? 'opacity-100' : 'opacity-40 hover:opacity-70'}`}
+                style={currentLang === 'ja' ? 'background-color: var(--accent); color: var(--bg-primary);' : 'color: var(--text-secondary);'}
+              >
+                JA
+              </a>
+            </div>
+          )}
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-medium" style="color: var(--text-primary);">
           {post.data.title}
         </h1>
       </header>

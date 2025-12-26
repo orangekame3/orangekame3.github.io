@@ -1,10 +1,13 @@
 ---
 import { getCollection } from 'astro:content';
 
-const posts = (await getCollection('blog'))
-  .filter((post) => !post.data.draft)
+const allPosts = await getCollection('blog');
+const posts = allPosts
+  .filter((post) => !post.data.draft && post.data.lang === 'en')
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 5);
+
+const hasJaVersion = (slug: string) => allPosts.some((p) => p.slug === `${slug}-ja`);
 
 const formatDate = (date: Date) => {
   return date.toLocaleDateString('en-US', {
@@ -29,9 +32,16 @@ const formatDate = (date: Date) => {
       {posts.map((post) => (
         <a href={`/blog/${post.slug}`} class="block group">
           <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1 sm:gap-4">
-            <h3 class="text-sm sm:text-base font-medium group-hover:opacity-60 transition-opacity line-clamp-2 sm:truncate" style="color: var(--text-primary);">
-              {post.data.title}
-            </h3>
+            <div class="flex items-center gap-2 min-w-0">
+              <h3 class="text-sm sm:text-base font-medium group-hover:opacity-60 transition-opacity truncate" style="color: var(--text-primary);">
+                {post.data.title}
+              </h3>
+              {hasJaVersion(post.slug) && (
+                <span class="text-xs px-1 py-0.5 rounded shrink-0" style="background-color: var(--bg-tertiary); color: var(--accent);">
+                  en/ja
+                </span>
+              )}
+            </div>
             <span class="text-xs sm:text-sm shrink-0 tabular-nums" style="color: var(--text-tertiary);">
               {formatDate(post.data.date)}
             </span>
