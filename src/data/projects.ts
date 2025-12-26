@@ -16,6 +16,11 @@ export const projects: Project[] = [
     link: 'https://github.com/orangekame3/qasmtools',
   },
   {
+    title: 'aqrxiv',
+    description: 'Stylish QR codes for arXiv papers',
+    link: 'https://aqrxiv.org/',
+  },
+  {
     title: 'tftarget',
     description: 'Interactive Terraform target selector',
     link: 'https://github.com/future-architect/tftarget',
