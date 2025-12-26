@@ -16,8 +16,8 @@ const formatDate = (date: Date) => {
 ---
 
 <section class="py-12 sm:py-16">
-  <h2 class="text-xs sm:text-sm text-center mb-8 sm:mb-12" style="color: var(--text-tertiary);">
-    <span style="color: var(--text-secondary);">$</span> tail -n 5 posts.log
+  <h2 class="text-sm sm:text-base mb-6 sm:mb-8" style="color: var(--text-tertiary);">
+    <span style="color: var(--accent);">##</span> posts
   </h2>
 
   {posts.length === 0 ? (
@@ -42,13 +42,13 @@ const formatDate = (date: Date) => {
   )}
 
   {posts.length > 0 && (
-    <div class="mt-6 sm:mt-8 text-center">
+    <div class="mt-6 sm:mt-8">
       <a
         href="/blog"
         class="text-xs opacity-60 hover:opacity-100 transition-opacity"
         style="color: var(--text-primary);"
       >
-        <span style="color: var(--text-tertiary);">$</span> cat posts.log
+        view all →
       </a>
     </div>
   )}
