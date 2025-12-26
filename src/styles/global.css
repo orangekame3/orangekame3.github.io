@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --font-family-sans: 'Inter', system-ui, sans-serif;
+  --font-family-mono: 'JetBrains Mono', ui-monospace, monospace;
 }
 
 /* Light theme (default) */
@@ -34,13 +34,14 @@ html {
 }
 
 body {
-  font-family: var(--font-family-sans);
+  font-family: var(--font-family-mono);
   background-color: var(--bg-primary);
   color: var(--text-primary);
   transition: background-color 0.4s ease, color 0.4s ease;
-  line-height: 1.8;
-  letter-spacing: -0.011em;
+  line-height: 1.7;
+  letter-spacing: -0.02em;
   font-weight: 400;
+  font-size: 14px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -49,6 +50,11 @@ body {
 h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.03em;
   font-weight: 500;
+}
+
+/* Code-like accents */
+.mono-accent {
+  font-feature-settings: "liga" 1, "calt" 1;
 }
 
 /* Links */
