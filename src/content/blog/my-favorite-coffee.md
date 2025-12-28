@@ -4,6 +4,7 @@ title_en: My favorite coffee
 desc_ja: 黒子珈琲の珈琲が美味
 desc_en: The best coffee I've found at Kuroko in Tama
 date: 2025-12-28
+pinned: false
 ---
 
 ::ja
