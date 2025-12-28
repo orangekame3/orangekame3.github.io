@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
+import remarkBreaks from 'remark-breaks';
 import { remarkLangSections } from './src/plugins/remark-lang-sections.ts';
 
 // https://astro.build/config
@@ -9,6 +10,6 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
   markdown: {
-    remarkPlugins: [remarkLangSections]
+    remarkPlugins: [remarkBreaks, remarkLangSections]
   }
 });

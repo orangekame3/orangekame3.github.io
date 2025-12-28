@@ -13,6 +13,7 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.1.18",
     "astro": "^5.16.6",
+    "remark-breaks": "^4.0.0",
     "tailwindcss": "^4.1.18",
     "unist-util-visit": "^5.0.0"
   },
