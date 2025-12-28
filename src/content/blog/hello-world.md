@@ -8,6 +8,14 @@ date: 2025-12-27
 
 ::en
 
+<!-- draft:
+Welcome to my blog. This is a sample post to demonstrate the blog functionality.
+-->
+
+<!-- review:
+
+-->
+
 Welcome to my blog. This is a sample post to demonstrate the blog functionality.
 
 ## About This Blog
