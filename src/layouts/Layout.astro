@@ -3,9 +3,13 @@ import '../styles/global.css';
 
 interface Props {
   title: string;
+  description?: string;
+  ogImage?: string;
 }
 
-const { title } = Astro.props;
+const { title, description = 'Software Developer & Researcher', ogImage } = Astro.props;
+const siteUrl = 'https://www.orangekame3.net';
+const image = ogImage ? `${siteUrl}${ogImage}` : `${siteUrl}/background.jpg`;
 ---
 
 <!doctype html>
@@ -18,18 +22,18 @@ const { title } = Astro.props;
 
     <!-- OGP -->
     <meta property="og:title" content={title} />
-    <meta property="og:description" content="Software Developer & Researcher" />
-    <meta property="og:url" content="https://www.orangekame3.net/" />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={siteUrl} />
     <meta property="og:site_name" content="orangekame3" />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://www.orangekame3.net/background.jpg" />
+    <meta property="og:image" content={image} />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@orangekame3" />
     <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content="Software Developer & Researcher" />
-    <meta name="twitter:image" content="https://www.orangekame3.net/background.jpg" />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
 
     <title>{title}</title>
 

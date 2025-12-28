@@ -56,7 +56,7 @@ date: 2025-12-28
 
 大学時代の量子回路設計の知見もあり、ハードウェアに近い領域での運用とソフトウェア開発、そしてクラウドレイヤのソフトウェアの開発などに携わっている。
 
-2025年には開発成果である[OQTOPUS](https://oqtopus-team.github.io/)をOSSで公開し、[IEEE Quantum Week]で発表(https://ieeexplore.ieee.org/document/11250353)するなどの経験も積んでいる。
+2025年には開発成果である[OQTOPUS](https://oqtopus-team.github.io/)をOSSで公開し、[IEEE Quantum Week](https://ieeexplore.ieee.org/document/11250353)で発表するなどの経験も積んでいる。
 こうした経験は前職のままではおそらく詰めなかったものであると思うし、成果についても一定満足している。今後は開発した成果を日本国内だけでなく海外にも認知してもらえるように継続した機能拡張とアウトリーチを続けていく。
 
 >OQTOPUSについては[こちら](https://zenn.dev/qsrh/articles/oqtopus-20251222)の記事に詳細をまとめている。
