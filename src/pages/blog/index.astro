@@ -9,13 +9,8 @@ const posts = allPosts
   .filter((post) => !post.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
-const getLocalizedString = (value: string | { en?: string; ja?: string }, lang: 'en' | 'ja'): string => {
-  if (typeof value === 'string') return value;
-  return value[lang] || value.en || value.ja || '';
-};
-
-const hasMultiLang = (title: string | { en?: string; ja?: string }): boolean => {
-  return typeof title === 'object';
+const hasMultiLang = (data: { title_ja?: string; title_en?: string }): boolean => {
+  return !!(data.title_ja && data.title_en);
 };
 
 const formatDate = (date: Date) => {
@@ -54,30 +49,30 @@ const formatDate = (date: Date) => {
                 <time class="text-xs sm:text-sm tabular-nums" style="color: var(--text-tertiary);">
                   {formatDate(post.data.date)}
                 </time>
-                {hasMultiLang(post.data.title) && (
+                {hasMultiLang(post.data) && (
                   <span class="text-xs px-1.5 py-0.5 rounded" style="background-color: var(--bg-tertiary); color: var(--accent);">
                     en/ja
                   </span>
                 )}
               </div>
               <h2 class="post-title text-base sm:text-lg font-medium mt-1 group-hover:opacity-60 transition-opacity" style="color: var(--text-primary);">
-                {hasMultiLang(post.data.title) ? (
+                {hasMultiLang(post.data) ? (
                   <>
-                    <span class="title-text" data-lang="en">{getLocalizedString(post.data.title, 'en')}</span>
-                    <span class="title-text" data-lang="ja" style="display: none;">{getLocalizedString(post.data.title, 'ja')}</span>
+                    <span class="title-text" data-lang="en">{post.data.title_en}</span>
+                    <span class="title-text" data-lang="ja" style="display: none;">{post.data.title_ja}</span>
                   </>
                 ) : (
-                  getLocalizedString(post.data.title, 'en')
+                  post.data.title_en || post.data.title_ja
                 )}
               </h2>
               <p class="post-desc text-xs sm:text-sm mt-1 sm:mt-2 line-clamp-2" style="color: var(--text-secondary);">
-                {hasMultiLang(post.data.description) ? (
+                {hasMultiLang(post.data) ? (
                   <>
-                    <span class="desc-text" data-lang="en">{getLocalizedString(post.data.description, 'en')}</span>
-                    <span class="desc-text" data-lang="ja" style="display: none;">{getLocalizedString(post.data.description, 'ja')}</span>
+                    <span class="desc-text" data-lang="en">{post.data.desc_en}</span>
+                    <span class="desc-text" data-lang="ja" style="display: none;">{post.data.desc_ja}</span>
                   </>
                 ) : (
-                  getLocalizedString(post.data.description, 'en')
+                  post.data.desc_en || post.data.desc_ja
                 )}
               </p>
             </article>

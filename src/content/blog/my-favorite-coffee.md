@@ -1,10 +1,8 @@
 ---
-title:
-  en: My favorite coffee
-  ja: お気に入りのコーヒー
-description:
-  en: ""
-  ja: ""
+title_ja: お気に入りのコーヒー
+title_en: My favorite coffee
+desc_ja: ""
+desc_en: ""
 date: 2025-12-28
 ---
 
