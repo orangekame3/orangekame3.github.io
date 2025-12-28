@@ -68,6 +68,21 @@ export const talks: Talk[] = [
     type: 'poster',
     note: '1st Prize',
   },
+  {
+    title: 'Tunable coupling of lumped element resonators for scalable annealing architecture',
+    event: 'RIKEN-AIST Quantum Workshop',
+    date: '2019',
+    link: 'https://cems.riken.jp/2019riken-aist_ws/poster.html',
+    type: 'poster',
+  },
+  // conference (domestic)
+  {
+    title: '超伝導準集中定数共振器間における高強度可変結合素子の実装',
+    event: '日本物理学会',
+    date: '2021.03',
+    link: 'https://jglobal.jst.go.jp/detail?JGLOBAL_ID=202102282752761892',
+    type: 'conference',
+  },
   // community
   {
     title: 'クラウド量子コンピュータシステムの開発と運用',

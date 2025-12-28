@@ -1,0 +1,218 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { skillCategories } from '../data/skills';
+import { publications } from '../data/publications';
+import { talks } from '../data/talks';
+import { service } from '../data/service';
+import { careers } from '../data/career';
+
+const education = careers.filter((c) => c.role.includes('B.S.') || c.role.includes('M.S.') || c.role.includes('Ph.D.'));
+const experience = careers.filter((c) => !c.role.includes('B.S.') && !c.role.includes('M.S.') && !c.role.includes('Ph.D.'));
+
+const invited = talks.filter((t) => t.type === 'invited').sort((a, b) => b.date.localeCompare(a.date));
+const conference = talks.filter((t) => t.type === 'conference').sort((a, b) => b.date.localeCompare(a.date));
+const poster = talks.filter((t) => t.type === 'poster').sort((a, b) => b.date.localeCompare(a.date));
+---
+
+<Layout title="CV - Takafumi Miyanaga">
+  <Header />
+
+  <main class="max-w-xl mx-auto px-4 sm:px-6 py-12 sm:py-16 cv-content">
+    <div class="flex justify-between items-start mb-8">
+      <h1 class="text-lg sm:text-xl font-medium" style="color: var(--text-primary);">
+        Takafumi Miyanaga
+      </h1>
+      <button
+        onclick="window.print()"
+        class="text-xs px-3 py-1.5 rounded print:hidden hover:opacity-60 transition-opacity"
+        style="color: var(--accent); border: 1px solid var(--accent);"
+      >
+        Save as PDF
+      </button>
+    </div>
+
+    <p class="text-sm mb-8" style="color: var(--text-secondary);">
+      Specially Appointed Researcher at Center for Quantum Information and Quantum Biology (QIQB), Osaka University.
+      Working on quantum computer system development, cloud quantum computing platforms, and open-source software.
+    </p>
+
+    <!-- Education -->
+    <section class="mb-8">
+      <h2 class="text-sm sm:text-base mb-3" style="color: var(--text-tertiary);">
+        <span style="color: var(--accent);">##</span> Education
+      </h2>
+      <div class="space-y-2">
+        {education.map((edu) => (
+          <div class="flex justify-between text-sm" style="color: var(--text-secondary);">
+            <span>{edu.title}, {edu.role}</span>
+            <span style="color: var(--text-tertiary);">{edu.period}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section class="mb-8">
+      <h2 class="text-sm sm:text-base mb-3" style="color: var(--text-tertiary);">
+        <span style="color: var(--accent);">##</span> Experience
+      </h2>
+      <div class="space-y-2">
+        {experience.map((exp) => (
+          <div class="flex justify-between text-sm" style="color: var(--text-secondary);">
+            <span>{exp.title}, {exp.role}</span>
+            <span style="color: var(--text-tertiary);">{exp.period}</span>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="mb-8">
+      <h2 class="text-sm sm:text-base mb-3" style="color: var(--text-tertiary);">
+        <span style="color: var(--accent);">##</span> Skills
+      </h2>
+      <div class="space-y-1">
+        {skillCategories.map((category) => (
+          <div class="text-sm" style="color: var(--text-secondary);">
+            <span style="color: var(--text-tertiary);">{category.name}:</span> {category.skills.join(', ')}
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Publications -->
+    <section class="mb-8">
+      <h2 class="text-sm sm:text-base mb-3" style="color: var(--text-tertiary);">
+        <span style="color: var(--accent);">##</span> Publications
+      </h2>
+      <ul class="space-y-1.5 text-sm" style="color: var(--text-secondary);">
+        {publications.map((pub) => (
+          <li>
+            {pub.title}
+            <span style="color: var(--text-tertiary);"> — {pub.note}, {pub.year}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <!-- Invited Talks -->
+    {invited.length > 0 && (
+      <section class="mb-8">
+        <h2 class="text-sm sm:text-base mb-3" style="color: var(--text-tertiary);">
+          <span style="color: var(--accent);">##</span> Invited Talks
+        </h2>
+        <ul class="space-y-1.5 text-sm" style="color: var(--text-secondary);">
+          {invited.map((talk) => (
+            <li>
+              {talk.title}
+              <span style="color: var(--text-tertiary);"> — {talk.event}, {talk.date}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    <!-- Conference Presentations -->
+    {conference.length > 0 && (
+      <section class="mb-8">
+        <h2 class="text-sm sm:text-base mb-3" style="color: var(--text-tertiary);">
+          <span style="color: var(--accent);">##</span> Conference Presentations
+        </h2>
+        <ul class="space-y-1.5 text-sm" style="color: var(--text-secondary);">
+          {conference.map((talk) => (
+            <li>
+              {talk.title}
+              <span style="color: var(--text-tertiary);"> — {talk.event}, {talk.date}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    <!-- Poster Presentations -->
+    {poster.length > 0 && (
+      <section class="mb-8">
+        <h2 class="text-sm sm:text-base mb-3" style="color: var(--text-tertiary);">
+          <span style="color: var(--accent);">##</span> Poster Presentations
+        </h2>
+        <ul class="space-y-1.5 text-sm" style="color: var(--text-secondary);">
+          {poster.map((talk) => (
+            <li>
+              {talk.title}
+              <span style="color: var(--text-tertiary);"> — {talk.event}, {talk.date}</span>
+              {talk.note && <span style="color: var(--accent);"> ({talk.note})</span>}
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    <!-- Service -->
+    {service.length > 0 && (
+      <section class="mb-8">
+        <h2 class="text-sm sm:text-base mb-3" style="color: var(--text-tertiary);">
+          <span style="color: var(--accent);">##</span> Service
+        </h2>
+        <ul class="space-y-1.5 text-sm" style="color: var(--text-secondary);">
+          {service.map((s) => (
+            <li>
+              {s.role}
+              <span style="color: var(--text-tertiary);"> — {s.event}, {s.date}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    <div class="mt-12 pt-8 border-t print:hidden" style="border-color: var(--bg-secondary);">
+      <a
+        href="/"
+        class="text-sm hover:opacity-60 transition-opacity"
+        style="color: var(--accent);"
+      >
+        ← Back to home
+      </a>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  @media print {
+    :global(header),
+    :global(footer),
+    :global(.h-14) {
+      display: none !important;
+    }
+
+    :global(body) {
+      background: white !important;
+      color: black !important;
+    }
+
+    .cv-content {
+      padding: 0 !important;
+      max-width: 100% !important;
+    }
+
+    .cv-content h1,
+    .cv-content h2,
+    .cv-content p,
+    .cv-content li,
+    .cv-content span,
+    .cv-content div {
+      color: black !important;
+    }
+
+    .cv-content h2 span {
+      color: #666 !important;
+    }
+
+    section {
+      break-inside: avoid;
+    }
+  }
+</style>
