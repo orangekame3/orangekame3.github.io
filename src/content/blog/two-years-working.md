@@ -18,7 +18,7 @@ date: 2025-12-28
 
 >ここではシステムとわざわざ言及している気持ちとしては、量子計算上で実行するソフトウェアであるいわゆるアプリケーションソフトウェアと区別するためである。
 
-学歴は東京理科大学の理学研究科物理学専攻を修士で卒業しており、蔡先生のもとで超伝導量子エレクトロニクスを学んだ。研究内容は超伝導共振器間の可変型超強結合であり、もっぱら回路設計をしていた。
+学歴は東京理科大学の理学研究科物理学専攻を修士で卒業しており、蔡先生のもとで超伝導量子エレクトロニクスを学んだ。研究内容は[超伝導共振器間の可変型超強結合](https://journals.aps.org/prapplied/abstract/10.1103/PhysRevApplied.16.064041)であり、もっぱら回路設計をしていた。
 
 大学院卒業後は[フューチャーアーキテクト](https://www.future.co.jp/en/)にてシステム開発をしていた。フューチャーアーキテクトという会社は業種としては日系ITコンサルティング企業に分類されるが、社員にはシステム開発も要求されるといった少し変わった会社である。
 
@@ -184,7 +184,7 @@ My main focus is building system software for quantum computing.
 
 > I specifically say "system" software here to distinguish it from application software—programs that run on quantum computers.
 
-I completed my master's degree in physics at the Graduate School of Science, Tokyo University of Science, where I studied superconducting quantum electronics under Professor Tsai. My research focused on ultrastrong tunable coupling between superconducting resonators, and I mainly worked on circuit design.
+I completed my master's degree in physics at the Graduate School of Science, Tokyo University of Science, where I studied superconducting quantum electronics under Professor Tsai. My research focused on [ultrastrong tunable coupling between superconducting resonators](https://journals.aps.org/prapplied/abstract/10.1103/PhysRevApplied.16.064041), and I mainly worked on circuit design.
 
 After graduating, I worked at [Future Architect](https://www.future.co.jp/en/), developing system software. Future Architect is categorized as a Japanese IT consulting company, but it's somewhat unique in that employees are also expected to do hands-on system development.
 
