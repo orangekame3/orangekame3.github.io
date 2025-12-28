@@ -23,7 +23,7 @@ const defaultDesc = post.data.desc_en || post.data.desc_ja || '';
 const ogImage = `/og/${post.slug}.png`;
 const siteUrl = 'https://www.orangekame3.net';
 const postUrl = `${siteUrl}/blog/${post.slug}`;
-const xShareText = `blogged. ${defaultTitle}`;
+const xShareText = `blogged.\n---\n${defaultTitle}`;
 const xShareUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(xShareText)}&url=${encodeURIComponent(postUrl)}`;
 const fbShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(postUrl)}`;
 const linkedinShareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(postUrl)}`;
