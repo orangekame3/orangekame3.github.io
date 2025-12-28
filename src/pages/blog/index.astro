@@ -55,7 +55,7 @@ const formatDate = (date: Date) => {
                   </span>
                 )}
               </div>
-              <h2 class="post-title text-base sm:text-lg font-medium mt-1 group-hover:opacity-60 transition-opacity" style="color: var(--text-primary);">
+              <h2 class="post-title text-base sm:text-lg font-medium mt-1 group-hover:opacity-60 transition-opacity break-words" style="color: var(--text-primary);">
                 {hasMultiLang(post.data) ? (
                   <>
                     <span class="title-text" data-lang="en">{post.data.title_en}</span>
