@@ -1,6 +1,8 @@
 ---
 import SocialIcons from './SocialIcons.astro';
 import { profile } from '../data/profile';
+
+const titleText = profile.title.toLowerCase();
 ---
 
 <section class="py-12 sm:py-20 md:py-32">
@@ -20,9 +22,9 @@ import { profile } from '../data/profile';
       <span style="color: var(--accent);">~/</span>{profile.name.toLowerCase().replace(' ', '-')}
     </h1>
 
-    <!-- Title -->
+    <!-- Title with typing animation -->
     <p class="text-xs sm:text-sm mb-8 sm:mb-10" style="color: var(--text-tertiary);">
-      <span style="color: var(--accent-secondary);">&gt;</span> {profile.title.toLowerCase()}
+      <span style="color: var(--accent-secondary);">&gt;</span> <span id="typing-text" class="typing" data-text={titleText}></span><span class="cursor">_</span>
     </p>
 
     <!-- Bio -->
@@ -38,3 +40,32 @@ import { profile } from '../data/profile';
     </div>
   </div>
 </section>
+
+<style>
+  .cursor {
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+</style>
+
+<script>
+  const typingElement = document.getElementById('typing-text');
+  if (typingElement) {
+    const text = typingElement.dataset.text || '';
+    let index = 0;
+
+    function type() {
+      if (index < text.length) {
+        typingElement.textContent += text.charAt(index);
+        index++;
+        setTimeout(type, 50);
+      }
+    }
+
+    type();
+  }
+</script>
