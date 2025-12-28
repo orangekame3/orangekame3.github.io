@@ -20,10 +20,8 @@ interface Frontmatter {
   title?: string;
   description?: string;
   date?: string;
-  lang?: "en" | "ja";
   tags?: string[];
   publish?: boolean;
-  draft?: boolean;
   [key: string]: unknown;
 }
 
@@ -70,8 +68,6 @@ function generateAstroFrontmatter(fm: Frontmatter): string {
   lines.push(`title: "${fm.title || "Untitled"}"`);
   lines.push(`description: "${fm.description || ""}"`);
   lines.push(`date: ${fm.date || new Date().toISOString().split("T")[0]}`);
-  lines.push(`lang: ${fm.lang || "ja"}`);
-  lines.push(`draft: ${fm.draft ?? false}`);
   lines.push("---");
   return lines.join("\n");
 }

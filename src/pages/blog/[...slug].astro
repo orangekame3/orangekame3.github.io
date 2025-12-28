@@ -17,11 +17,15 @@ type Props = CollectionEntry<'blog'>;
 const post = Astro.props;
 const { Content } = await post.render();
 
-const allPosts = await getCollection('blog');
-const currentLang = post.data.lang;
-const baseSlug = post.slug.endsWith('-ja') ? post.slug.slice(0, -3) : post.slug;
-const altSlug = currentLang === 'en' ? `${baseSlug}-ja` : baseSlug;
-const altPost = allPosts.find((p) => p.slug === altSlug);
+const getLocalizedString = (value: string | { en?: string; ja?: string }, lang: 'en' | 'ja'): string => {
+  if (typeof value === 'string') return value;
+  return value[lang] || value.en || value.ja || '';
+};
+
+const hasMultiLang = typeof post.data.title === 'object';
+const titleEn = getLocalizedString(post.data.title, 'en');
+const titleJa = getLocalizedString(post.data.title, 'ja');
+const defaultTitle = titleEn || titleJa;
 
 const formatDate = (date: Date) => {
   return date.toLocaleDateString('en-US', {
@@ -32,7 +36,7 @@ const formatDate = (date: Date) => {
 };
 ---
 
-<Layout title={`${post.data.title} - Takafumi Miyanaga`}>
+<Layout title={`${defaultTitle} - Takafumi Miyanaga`}>
   <Header />
 
   <main class="max-w-xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
@@ -52,27 +56,34 @@ const formatDate = (date: Date) => {
           <time class="text-xs sm:text-sm" style="color: var(--text-tertiary);">
             {formatDate(post.data.date)}
           </time>
-          {altPost && (
+          {hasMultiLang && (
             <div class="flex items-center rounded overflow-hidden text-xs" style="background-color: var(--bg-tertiary);">
-              <a
-                href={`/blog/${currentLang === 'en' ? post.slug : altSlug}`}
-                class={`px-2 py-1 transition-opacity ${currentLang === 'en' ? 'opacity-100' : 'opacity-40 hover:opacity-70'}`}
-                style={currentLang === 'en' ? 'background-color: var(--accent); color: var(--bg-primary);' : 'color: var(--text-secondary);'}
+              <button
+                id="lang-en"
+                class="lang-btn px-2 py-1 transition-opacity"
+                data-lang="en"
               >
                 EN
-              </a>
-              <a
-                href={`/blog/${currentLang === 'ja' ? post.slug : altSlug}`}
-                class={`px-2 py-1 transition-opacity ${currentLang === 'ja' ? 'opacity-100' : 'opacity-40 hover:opacity-70'}`}
-                style={currentLang === 'ja' ? 'background-color: var(--accent); color: var(--bg-primary);' : 'color: var(--text-secondary);'}
+              </button>
+              <button
+                id="lang-ja"
+                class="lang-btn px-2 py-1 transition-opacity"
+                data-lang="ja"
               >
                 JA
-              </a>
+              </button>
             </div>
           )}
         </div>
         <h1 class="text-2xl sm:text-3xl font-medium" style="color: var(--text-primary);">
-          {post.data.title}
+          {hasMultiLang ? (
+            <>
+              <span class="title-text" data-lang="en">{titleEn}</span>
+              <span class="title-text" data-lang="ja" style="display: none;">{titleJa}</span>
+            </>
+          ) : (
+            defaultTitle
+          )}
         </h1>
       </header>
 
@@ -85,6 +96,65 @@ const formatDate = (date: Date) => {
 
   <Footer />
 </Layout>
+
+{hasMultiLang && (
+  <script>
+    function initLangSwitcher() {
+      const buttons = document.querySelectorAll('.lang-btn');
+      const titles = document.querySelectorAll('.title-text');
+      const prose = document.querySelector('.prose');
+
+      const savedLang = localStorage.getItem('blog-lang') || 'en';
+      setLang(savedLang);
+
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const lang = btn.getAttribute('data-lang');
+          if (lang) {
+            setLang(lang);
+            localStorage.setItem('blog-lang', lang);
+          }
+        });
+      });
+
+      function setLang(lang: string) {
+        // Update buttons
+        buttons.forEach(btn => {
+          const isActive = btn.getAttribute('data-lang') === lang;
+          if (isActive) {
+            btn.style.backgroundColor = 'var(--accent)';
+            btn.style.color = 'var(--bg-primary)';
+            btn.style.opacity = '1';
+          } else {
+            btn.style.backgroundColor = 'transparent';
+            btn.style.color = 'var(--text-secondary)';
+            btn.style.opacity = '0.4';
+          }
+        });
+
+        // Update titles
+        titles.forEach(title => {
+          const titleEl = title as HTMLElement;
+          titleEl.style.display = title.getAttribute('data-lang') === lang ? 'inline' : 'none';
+        });
+
+        // Update content sections
+        if (prose) {
+          const sections = prose.querySelectorAll('[data-lang]');
+          if (sections.length > 0) {
+            sections.forEach(section => {
+              const sectionEl = section as HTMLElement;
+              sectionEl.style.display = section.getAttribute('data-lang') === lang ? 'block' : 'none';
+            });
+          }
+        }
+      }
+    }
+
+    initLangSwitcher();
+    document.addEventListener('astro:after-swap', initLangSwitcher);
+  </script>
+)}
 
 <style is:global>
   .prose {
