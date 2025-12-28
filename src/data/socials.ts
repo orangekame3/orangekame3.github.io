@@ -1,4 +1,4 @@
-export type SocialIcon = 'github' | 'twitter' | 'linkedin' | 'email';
+export type SocialIcon = 'github' | 'twitter' | 'linkedin' | 'email' | 'zenn';
 
 export interface Social {
   name: string;
@@ -26,5 +26,10 @@ export const socials: Social[] = [
     name: 'Email',
     href: 'mailto:miya.org.0309@gmail.com',
     icon: 'email',
+  },
+  {
+    name: 'Zenn',
+    href: 'https://zenn.dev/orangekame',
+    icon: 'zenn',
   },
 ];
