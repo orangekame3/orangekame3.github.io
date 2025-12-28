@@ -17,8 +17,10 @@ const allGroups = [
   { label: 'community', items: community },
 ].filter((g) => g.items.length > 0);
 
-// Flatten and limit to MAX_ITEMS
-const allItems = allGroups.flatMap((g) => g.items.map((item) => ({ ...item, groupLabel: g.label })));
+// Flatten, sort by date, and limit to MAX_ITEMS
+const allItems = allGroups
+  .flatMap((g) => g.items.map((item) => ({ ...item, groupLabel: g.label })))
+  .sort((a, b) => b.date.localeCompare(a.date));
 const displayItems = allItems.slice(0, MAX_ITEMS);
 const hasMore = allItems.length > MAX_ITEMS;
 ---
