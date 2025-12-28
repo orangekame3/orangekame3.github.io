@@ -7,9 +7,32 @@ interface Props {
   ogImage?: string;
 }
 
-const { title, description = 'Software Developer & Researcher', ogImage } = Astro.props;
+const { title, description = '宮永崇史 (Takafumi Miyanaga) - 大阪大学QIQB 量子コンピュータシステム開発者・研究者。OQTOPUSプロジェクト開発者。', ogImage } = Astro.props;
 const siteUrl = 'https://www.orangekame3.net';
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
 const image = ogImage ? `${siteUrl}${ogImage}` : `${siteUrl}/og/index.png`;
+const keywords = '宮永崇史, Takafumi Miyanaga, OQTOPUS, 量子コンピュータ, quantum computing, quantum computer, 量子計算, 量子情報, quantum information, 大阪大学, Osaka University, QIQB, orangekame3, 超伝導量子ビット, superconducting qubit, クラウド量子コンピュータ, cloud quantum computing';
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "宮永崇史",
+  "alternateName": "Takafumi Miyanaga",
+  "url": siteUrl,
+  "image": `${siteUrl}/orangekame3.jpg`,
+  "jobTitle": "Specially Appointed Researcher",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Osaka University QIQB"
+  },
+  "sameAs": [
+    "https://github.com/orangekame3",
+    "https://twitter.com/orangekame3",
+    "https://zenn.dev/orangekame",
+    "https://www.linkedin.com/in/takafumi-miyanaga-4476131a6"
+  ],
+  "knowsAbout": ["Quantum Computing", "OQTOPUS", "Go", "Python", "Open Source Software"]
+};
 ---
 
 <!doctype html>
@@ -18,15 +41,22 @@ const image = ogImage ? `${siteUrl}${ogImage}` : `${siteUrl}/og/index.png`;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/jpeg" href="/orangekame3.jpg" />
+    <link rel="canonical" href={canonicalUrl} />
     <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO -->
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="宮永崇史 (Takafumi Miyanaga)" />
 
     <!-- OGP -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={siteUrl} />
-    <meta property="og:site_name" content="orangekame3" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content="宮永崇史 | Takafumi Miyanaga" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content={image} />
+    <meta property="og:locale" content="ja_JP" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -34,6 +64,9 @@ const image = ogImage ? `${siteUrl}${ogImage}` : `${siteUrl}/og/index.png`;
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={image} />
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
     <title>{title}</title>
 
