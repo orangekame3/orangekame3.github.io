@@ -45,8 +45,3 @@ In Tama, there's a coffee shop called [Kuroko](https://www.instagram.com/coffeey
 
 They sell a coffee called [Reiryuu](https://isseiogomori.thebase.in/items/75442271) there, and it's absolutely exquisite—I highly recommend giving it a try.
 I'm not particularly picky about coffee—I just use a [DeLonghi machine](https://www.delonghi.com/ja-jp/p/magunifuikas-ecam22112b-magunifuikas-%E5%85%A8%E8%87%AA%E5%8B%95ko%E3%83%BChi%E3%83%BCmashin-buratsuku/ECAM22112B.html?pid=0132213169) and don't even brew it myself—but coffee made with these beans is hands down the best I've ever had. I highly recommend it; please give it a try.
-
-
-
-
-
