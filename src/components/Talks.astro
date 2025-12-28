@@ -1,5 +1,26 @@
 ---
 import { talks } from '../data/talks';
+
+const MAX_ITEMS = 5;
+
+const invited = talks.filter((t) => t.type === 'invited').sort((a, b) => b.date.localeCompare(a.date));
+const conference = talks.filter((t) => t.type === 'conference').sort((a, b) => b.date.localeCompare(a.date));
+const workshop = talks.filter((t) => t.type === 'workshop').sort((a, b) => b.date.localeCompare(a.date));
+const poster = talks.filter((t) => t.type === 'poster').sort((a, b) => b.date.localeCompare(a.date));
+const community = talks.filter((t) => t.type === 'community').sort((a, b) => b.date.localeCompare(a.date));
+
+const allGroups = [
+  { label: 'invited', items: invited },
+  { label: 'conference', items: conference },
+  { label: 'workshop', items: workshop },
+  { label: 'poster', items: poster },
+  { label: 'community', items: community },
+].filter((g) => g.items.length > 0);
+
+// Flatten and limit to MAX_ITEMS
+const allItems = allGroups.flatMap((g) => g.items.map((item) => ({ ...item, groupLabel: g.label })));
+const displayItems = allItems.slice(0, MAX_ITEMS);
+const hasMore = allItems.length > MAX_ITEMS;
 ---
 
 <section class="py-12 sm:py-16">
@@ -8,7 +29,7 @@ import { talks } from '../data/talks';
   </h2>
 
   <div class="space-y-4 sm:space-y-5">
-    {talks.map((talk) => (
+    {displayItems.map((talk) => (
       <a
         href={talk.link}
         target="_blank"
@@ -22,6 +43,8 @@ import { talks } from '../data/talks';
             </h3>
             <p class="text-xs sm:text-sm mt-0.5 sm:mt-1" style="color: var(--text-tertiary);">
               {talk.event}
+              <span style="color: var(--accent);"> · {talk.groupLabel}</span>
+              {talk.note && <span style="color: var(--accent);"> · {talk.note}</span>}
             </p>
           </div>
           <span class="text-xs sm:text-sm shrink-0 tabular-nums" style="color: var(--text-tertiary);">
@@ -31,4 +54,16 @@ import { talks } from '../data/talks';
       </a>
     ))}
   </div>
+
+  {hasMore && (
+    <div class="mt-6">
+      <a
+        href="/talks"
+        class="text-sm hover:opacity-60 transition-opacity"
+        style="color: var(--accent);"
+      >
+        View more →
+      </a>
+    </div>
+  )}
 </section>

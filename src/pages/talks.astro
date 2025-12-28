@@ -1,0 +1,69 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { talks } from '../data/talks';
+
+const invited = talks.filter((t) => t.type === 'invited').sort((a, b) => b.date.localeCompare(a.date));
+const conference = talks.filter((t) => t.type === 'conference').sort((a, b) => b.date.localeCompare(a.date));
+const workshop = talks.filter((t) => t.type === 'workshop').sort((a, b) => b.date.localeCompare(a.date));
+const poster = talks.filter((t) => t.type === 'poster').sort((a, b) => b.date.localeCompare(a.date));
+const community = talks.filter((t) => t.type === 'community').sort((a, b) => b.date.localeCompare(a.date));
+
+const groups = [
+  { label: 'invited', items: invited },
+  { label: 'conference', items: conference },
+  { label: 'workshop', items: workshop },
+  { label: 'poster', items: poster },
+  { label: 'community', items: community },
+].filter((g) => g.items.length > 0);
+---
+
+<Layout title="Talks - Takafumi Miyanaga">
+  <Header />
+
+  <main class="max-w-xl mx-auto px-4 sm:px-6">
+    <section class="py-12 sm:py-16">
+      <h1 class="text-sm sm:text-base mb-6 sm:mb-8" style="color: var(--text-tertiary);">
+        <span style="color: var(--accent);">##</span> talks
+      </h1>
+
+      <div class="space-y-8">
+        {groups.map((group) => (
+          <div>
+            <h2 class="text-xs sm:text-sm mb-3 sm:mb-4" style="color: var(--text-tertiary);">
+              {group.label}
+            </h2>
+            <div class="space-y-4 sm:space-y-5">
+              {group.items.map((talk) => (
+                <a
+                  href={talk.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="block group"
+                >
+                  <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1 sm:gap-4">
+                    <div class="min-w-0">
+                      <h3 class="text-sm sm:text-base font-medium group-hover:opacity-60 transition-opacity line-clamp-2 sm:truncate" style="color: var(--text-primary);">
+                        {talk.title}
+                      </h3>
+                      <p class="text-xs sm:text-sm mt-0.5 sm:mt-1" style="color: var(--text-tertiary);">
+                        {talk.event}
+                        {talk.note && <span style="color: var(--accent);"> · {talk.note}</span>}
+                      </p>
+                    </div>
+                    <span class="text-xs sm:text-sm shrink-0 tabular-nums" style="color: var(--text-tertiary);">
+                      {talk.date}
+                    </span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

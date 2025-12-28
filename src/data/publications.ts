@@ -13,6 +13,18 @@ export const publications: Publication[] = [
     link: 'https://ieeexplore.ieee.org/document/11250353',
   },
   {
+    title: '量子クラウドの待ち時間短縮：量子古典ハイブリッド実行と量子マルチプログラミング',
+    note: '情報処理学会 研究報告',
+    year: '2025',
+    link: 'https://www.ipsj.or.jp/kenkyukai/event/hpc198qs14.html',
+  },
+  {
+    title: '1万量子ビットの実現に向けた量子コンピュータシステム化の課題',
+    note: '情報処理学会 研究報告',
+    year: '2025',
+    link: 'https://www.ipsj.or.jp/kenkyukai/event/hpc198qs14.html',
+  },
+  {
     title: 'Software Mistakes and Tradeoffs',
     note: 'Translation',
     year: '2023',
