@@ -9,9 +9,9 @@ const posts = allPosts
   .filter((post) => !post.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
-const getLocalizedString = (value: string | { en?: string; ja?: string }): string => {
+const getLocalizedString = (value: string | { en?: string; ja?: string }, lang: 'en' | 'ja'): string => {
   if (typeof value === 'string') return value;
-  return value.en || value.ja || '';
+  return value[lang] || value.en || value.ja || '';
 };
 
 const hasMultiLang = (title: string | { en?: string; ja?: string }): boolean => {
@@ -31,9 +31,15 @@ const formatDate = (date: Date) => {
   <Header />
 
   <main class="max-w-xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
-    <h1 class="text-sm sm:text-base mb-10 sm:mb-16" style="color: var(--text-tertiary);">
-      <span style="color: var(--accent);">##</span> blog
-    </h1>
+    <div class="flex items-center justify-between mb-10 sm:mb-16">
+      <h1 class="text-sm sm:text-base" style="color: var(--text-tertiary);">
+        <span style="color: var(--accent);">##</span> blog
+      </h1>
+      <div class="flex items-center rounded overflow-hidden text-xs" style="background-color: var(--bg-tertiary);">
+        <button class="lang-btn px-2 py-1 transition-opacity" data-lang="en">EN</button>
+        <button class="lang-btn px-2 py-1 transition-opacity" data-lang="ja">JA</button>
+      </div>
+    </div>
 
     {posts.length === 0 ? (
       <p class="text-center" style="color: var(--text-tertiary);">
@@ -54,11 +60,25 @@ const formatDate = (date: Date) => {
                   </span>
                 )}
               </div>
-              <h2 class="text-base sm:text-lg font-medium mt-1 group-hover:opacity-60 transition-opacity" style="color: var(--text-primary);">
-                {getLocalizedString(post.data.title)}
+              <h2 class="post-title text-base sm:text-lg font-medium mt-1 group-hover:opacity-60 transition-opacity" style="color: var(--text-primary);">
+                {hasMultiLang(post.data.title) ? (
+                  <>
+                    <span class="title-text" data-lang="en">{getLocalizedString(post.data.title, 'en')}</span>
+                    <span class="title-text" data-lang="ja" style="display: none;">{getLocalizedString(post.data.title, 'ja')}</span>
+                  </>
+                ) : (
+                  getLocalizedString(post.data.title, 'en')
+                )}
               </h2>
-              <p class="text-xs sm:text-sm mt-1 sm:mt-2 line-clamp-2" style="color: var(--text-secondary);">
-                {getLocalizedString(post.data.description)}
+              <p class="post-desc text-xs sm:text-sm mt-1 sm:mt-2 line-clamp-2" style="color: var(--text-secondary);">
+                {hasMultiLang(post.data.description) ? (
+                  <>
+                    <span class="desc-text" data-lang="en">{getLocalizedString(post.data.description, 'en')}</span>
+                    <span class="desc-text" data-lang="ja" style="display: none;">{getLocalizedString(post.data.description, 'ja')}</span>
+                  </>
+                ) : (
+                  getLocalizedString(post.data.description, 'en')
+                )}
               </p>
             </article>
           </a>
@@ -69,3 +89,53 @@ const formatDate = (date: Date) => {
 
   <Footer />
 </Layout>
+
+<script>
+  function initLangSwitcher() {
+    const buttons = document.querySelectorAll('.lang-btn');
+    const titles = document.querySelectorAll('.title-text');
+    const descs = document.querySelectorAll('.desc-text');
+
+    const savedLang = localStorage.getItem('blog-lang') || 'en';
+    setLang(savedLang);
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const lang = btn.getAttribute('data-lang');
+        if (lang) {
+          setLang(lang);
+          localStorage.setItem('blog-lang', lang);
+        }
+      });
+    });
+
+    function setLang(lang: string) {
+      buttons.forEach(btn => {
+        const isActive = btn.getAttribute('data-lang') === lang;
+        const btnEl = btn as HTMLElement;
+        if (isActive) {
+          btnEl.style.backgroundColor = 'var(--accent)';
+          btnEl.style.color = 'var(--bg-primary)';
+          btnEl.style.opacity = '1';
+        } else {
+          btnEl.style.backgroundColor = 'transparent';
+          btnEl.style.color = 'var(--text-secondary)';
+          btnEl.style.opacity = '0.4';
+        }
+      });
+
+      titles.forEach(title => {
+        const el = title as HTMLElement;
+        el.style.display = title.getAttribute('data-lang') === lang ? 'inline' : 'none';
+      });
+
+      descs.forEach(desc => {
+        const el = desc as HTMLElement;
+        el.style.display = desc.getAttribute('data-lang') === lang ? 'inline' : 'none';
+      });
+    }
+  }
+
+  initLangSwitcher();
+  document.addEventListener('astro:after-swap', initLangSwitcher);
+</script>
