@@ -16,60 +16,33 @@ const VAULT_ASSETS_DIR = path.resolve(
 const BLOG_CONTENT_DIR = path.resolve(__dirname, "../src/content/blog");
 const BLOG_IMAGES_DIR = path.resolve(__dirname, "../public/images/vault");
 
-interface Frontmatter {
-  title?: string;
-  description?: string;
-  date?: string;
-  tags?: string[];
-  publish?: boolean;
-  [key: string]: unknown;
-}
-
 function parseFrontmatter(content: string): {
-  frontmatter: Frontmatter;
+  rawFrontmatter: string;
+  hasPublish: boolean;
   body: string;
 } {
   const match = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
   if (!match) {
-    return { frontmatter: {}, body: content };
+    return { rawFrontmatter: "", hasPublish: false, body: content };
   }
 
   const yamlContent = match[1];
   const body = match[2];
-  const frontmatter: Frontmatter = {};
 
-  for (const line of yamlContent.split("\n")) {
-    const colonIndex = line.indexOf(":");
-    if (colonIndex === -1) continue;
+  // Check if publish: true
+  const hasPublish = /^publish:\s*true\s*$/m.test(yamlContent);
 
-    const key = line.slice(0, colonIndex).trim();
-    let value = line.slice(colonIndex + 1).trim();
+  // Remove publish field from frontmatter
+  const cleanedYaml = yamlContent
+    .split("\n")
+    .filter(line => !line.match(/^publish:\s*/))
+    .join("\n");
 
-    if (value === "true") {
-      frontmatter[key] = true;
-    } else if (value === "false") {
-      frontmatter[key] = false;
-    } else if (value.startsWith("[") && value.endsWith("]")) {
-      frontmatter[key] = value
-        .slice(1, -1)
-        .split(",")
-        .map((s) => s.trim())
-        .filter(Boolean);
-    } else {
-      frontmatter[key] = value;
-    }
-  }
-
-  return { frontmatter, body };
+  return { rawFrontmatter: cleanedYaml, hasPublish, body };
 }
 
-function generateAstroFrontmatter(fm: Frontmatter): string {
-  const lines = ["---"];
-  lines.push(`title: "${fm.title || "Untitled"}"`);
-  lines.push(`description: "${fm.description || ""}"`);
-  lines.push(`date: ${fm.date || new Date().toISOString().split("T")[0]}`);
-  lines.push("---");
-  return lines.join("\n");
+function generateAstroFrontmatter(rawYaml: string): string {
+  return `---\n${rawYaml}\n---`;
 }
 
 function convertWikiLinks(content: string): string {
@@ -143,9 +116,9 @@ function main(): void {
   for (const file of files) {
     const filePath = path.join(VAULT_BLOG_DIR, file);
     const content = fs.readFileSync(filePath, "utf-8");
-    const { frontmatter, body } = parseFrontmatter(content);
+    const { rawFrontmatter, hasPublish, body } = parseFrontmatter(content);
 
-    if (!frontmatter.publish) {
+    if (!hasPublish) {
       console.log(`Skipped (publish: false): ${file}`);
       skipped++;
       continue;
@@ -156,7 +129,7 @@ function main(): void {
     processedBody = extractAndConvertImages(processedBody, copiedImages);
 
     const slug = generateSlug(file);
-    const newFrontmatter = generateAstroFrontmatter(frontmatter);
+    const newFrontmatter = generateAstroFrontmatter(rawFrontmatter);
     const newContent = newFrontmatter + "\n" + processedBody;
 
     const destPath = path.join(BLOG_CONTENT_DIR, `${slug}.md`);

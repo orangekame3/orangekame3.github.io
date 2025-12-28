@@ -1,6 +1,10 @@
 ---
-title: "Untitled"
-description: ""
+title:
+  en: My favorite coffee
+  ja: お気に入りのコーヒー
+description:
+  en: ""
+  ja: ""
 date: 2025-12-28
 ---
 
