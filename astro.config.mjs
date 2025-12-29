@@ -3,6 +3,8 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import remarkBreaks from 'remark-breaks';
 import { remarkLangSections } from './src/plugins/remark-lang-sections.ts';
+import { remarkInstagram } from './src/plugins/remark-instagram.ts';
+import { remarkYoutube } from './src/plugins/remark-youtube.ts';
 import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
@@ -13,6 +15,6 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
   markdown: {
-    remarkPlugins: [remarkBreaks, remarkLangSections]
+    remarkPlugins: [remarkBreaks, remarkLangSections, remarkInstagram, remarkYoutube]
   }
 });
