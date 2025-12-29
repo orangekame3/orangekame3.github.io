@@ -1,0 +1,146 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const allEntries = await getCollection('daily');
+const entries = allEntries
+  .filter((entry) => entry.data.publish)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const formatDate = (date: Date) => {
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
+};
+
+// Extract preview from content
+function extractPreview(content: string, lang: 'ja' | 'en'): string {
+  const marker = lang === 'ja' ? '::ja' : '::en';
+  const nextMarker = lang === 'ja' ? '::en' : '::ja';
+
+  const startIdx = content.indexOf(marker);
+  if (startIdx === -1) return '';
+
+  let section = content.slice(startIdx + marker.length);
+  const endIdx = section.indexOf(nextMarker);
+  if (endIdx !== -1) {
+    section = section.slice(0, endIdx);
+  }
+
+  // For English, remove draft and review comments
+  if (lang === 'en') {
+    section = section.replace(/<!--\s*draft:[\s\S]*?-->/g, '');
+    section = section.replace(/<!--\s*review:[\s\S]*?-->/g, '');
+  }
+
+  // Get first non-empty line
+  const lines = section.split('\n').map(l => l.trim()).filter(l => l && !l.startsWith('#') && !l.startsWith('<!--'));
+  const firstLine = lines[0] || '';
+
+  // Truncate if too long
+  return firstLine.length > 60 ? firstLine.slice(0, 60) + '...' : firstLine;
+}
+
+// Get previews for each entry
+const entriesWithPreview = await Promise.all(
+  entries.map(async (entry) => {
+    const { body } = entry;
+    return {
+      ...entry,
+      previewJa: extractPreview(body, 'ja'),
+      previewEn: extractPreview(body, 'en'),
+    };
+  })
+);
+---
+
+<Layout title="Daily - Takafumi Miyanaga">
+  <Header />
+
+  <main class="max-w-xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
+    <div class="flex items-center justify-between mb-10 sm:mb-16">
+      <h1 class="text-sm sm:text-base" style="color: var(--text-tertiary);">
+        <span style="color: var(--accent);">##</span> daily
+      </h1>
+      <div class="flex items-center rounded overflow-hidden text-xs" style="background-color: var(--bg-tertiary);">
+        <button class="lang-btn px-2 py-1 transition-opacity" data-lang="en">EN</button>
+        <button class="lang-btn px-2 py-1 transition-opacity" data-lang="ja">JA</button>
+      </div>
+    </div>
+
+    {entriesWithPreview.length === 0 ? (
+      <p class="text-center" style="color: var(--text-tertiary);">
+        No entries yet.
+      </p>
+    ) : (
+      <div class="space-y-6 sm:space-y-8">
+        {entriesWithPreview.map((entry) => (
+          <a href={`/daily/${entry.slug}`} class="block group">
+            <article>
+              <time class="text-xs sm:text-sm tabular-nums" style="color: var(--text-tertiary);">
+                {formatDate(entry.data.date)}
+              </time>
+              <p class="preview-text mt-1 text-sm sm:text-base group-hover:opacity-60 transition-opacity line-clamp-1" style="color: var(--text-secondary);">
+                <span class="preview-ja" data-lang="ja">{entry.previewJa}</span>
+                <span class="preview-en" data-lang="en" style="display: none;">{entry.previewEn}</span>
+              </p>
+            </article>
+          </a>
+        ))}
+      </div>
+    )}
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  function initLangSwitcher() {
+    const buttons = document.querySelectorAll('.lang-btn');
+    const previewsJa = document.querySelectorAll('.preview-ja');
+    const previewsEn = document.querySelectorAll('.preview-en');
+
+    const savedLang = localStorage.getItem('blog-lang') || 'en';
+    setLang(savedLang);
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const lang = btn.getAttribute('data-lang');
+        if (lang) {
+          setLang(lang);
+          localStorage.setItem('blog-lang', lang);
+        }
+      });
+    });
+
+    function setLang(lang: string) {
+      buttons.forEach(btn => {
+        const isActive = btn.getAttribute('data-lang') === lang;
+        const btnEl = btn as HTMLElement;
+        if (isActive) {
+          btnEl.style.backgroundColor = 'var(--accent)';
+          btnEl.style.color = 'var(--bg-primary)';
+          btnEl.style.opacity = '1';
+        } else {
+          btnEl.style.backgroundColor = 'transparent';
+          btnEl.style.color = 'var(--text-secondary)';
+          btnEl.style.opacity = '0.4';
+        }
+      });
+
+      previewsJa.forEach(el => {
+        (el as HTMLElement).style.display = lang === 'ja' ? 'inline' : 'none';
+      });
+      previewsEn.forEach(el => {
+        (el as HTMLElement).style.display = lang === 'en' ? 'inline' : 'none';
+      });
+    }
+  }
+
+  initLangSwitcher();
+  document.addEventListener('astro:after-swap', initLangSwitcher);
+</script>

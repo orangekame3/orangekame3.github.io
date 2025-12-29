@@ -5,15 +5,15 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const VAULT_BLOG_DIR = path.resolve(
+const VAULT_BASE_DIR = path.resolve(
   process.env.HOME || "~",
-  "src/github.com/orangekame3/vault/blog"
+  "src/github.com/orangekame3/vault"
 );
-const VAULT_ASSETS_DIR = path.resolve(
-  process.env.HOME || "~",
-  "src/github.com/orangekame3/vault/assets"
-);
+const VAULT_BLOG_DIR = path.join(VAULT_BASE_DIR, "blog");
+const VAULT_DAILY_DIR = path.join(VAULT_BASE_DIR, "daily");
+const VAULT_ASSETS_DIR = path.join(VAULT_BASE_DIR, "assets");
 const BLOG_CONTENT_DIR = path.resolve(__dirname, "../src/content/blog");
+const DAILY_CONTENT_DIR = path.resolve(__dirname, "../src/content/daily");
 const BLOG_IMAGES_DIR = path.resolve(__dirname, "../public/images/vault");
 
 function parseFrontmatter(content: string): {
@@ -97,29 +97,33 @@ function generateSlug(filename: string): string {
   return name.replace(/\s+/g, "-");
 }
 
-function main(): void {
-  console.log("Importing from Obsidian Vault...\n");
+function importContent(
+  sourceDir: string,
+  destDir: string,
+  label: string
+): { imported: number; skipped: number } {
+  console.log(`\n[${label}]`);
 
-  if (!fs.existsSync(VAULT_BLOG_DIR)) {
-    console.error(`Error: Vault blog directory not found: ${VAULT_BLOG_DIR}`);
-    process.exit(1);
+  if (!fs.existsSync(sourceDir)) {
+    console.log(`  Directory not found: ${sourceDir}`);
+    return { imported: 0, skipped: 0 };
   }
 
-  if (!fs.existsSync(BLOG_CONTENT_DIR)) {
-    fs.mkdirSync(BLOG_CONTENT_DIR, { recursive: true });
+  if (!fs.existsSync(destDir)) {
+    fs.mkdirSync(destDir, { recursive: true });
   }
 
-  const files = fs.readdirSync(VAULT_BLOG_DIR).filter((f) => f.endsWith(".md"));
+  const files = fs.readdirSync(sourceDir).filter((f) => f.endsWith(".md"));
   let imported = 0;
   let skipped = 0;
 
   for (const file of files) {
-    const filePath = path.join(VAULT_BLOG_DIR, file);
+    const filePath = path.join(sourceDir, file);
     const content = fs.readFileSync(filePath, "utf-8");
     const { rawFrontmatter, hasPublish, body } = parseFrontmatter(content);
 
     if (!hasPublish) {
-      console.log(`Skipped (publish: false): ${file}`);
+      console.log(`  Skipped (publish: false): ${file}`);
       skipped++;
       continue;
     }
@@ -132,9 +136,9 @@ function main(): void {
     const newFrontmatter = generateAstroFrontmatter(rawFrontmatter);
     const newContent = newFrontmatter + "\n" + processedBody;
 
-    const destPath = path.join(BLOG_CONTENT_DIR, `${slug}.md`);
+    const destPath = path.join(destDir, `${slug}.md`);
     fs.writeFileSync(destPath, newContent);
-    console.log(`Imported: ${file} -> ${slug}.md`);
+    console.log(`  Imported: ${file} -> ${slug}.md`);
 
     if (copiedImages.size > 0) {
       copyImages(copiedImages);
@@ -143,7 +147,22 @@ function main(): void {
     imported++;
   }
 
-  console.log(`\nDone! Imported: ${imported}, Skipped: ${skipped}`);
+  return { imported, skipped };
+}
+
+function main(): void {
+  console.log("Importing from Obsidian Vault...");
+
+  const blogResult = importContent(VAULT_BLOG_DIR, BLOG_CONTENT_DIR, "Blog");
+  const dailyResult = importContent(VAULT_DAILY_DIR, DAILY_CONTENT_DIR, "Daily");
+
+  const totalImported = blogResult.imported + dailyResult.imported;
+  const totalSkipped = blogResult.skipped + dailyResult.skipped;
+
+  console.log(`\nDone!`);
+  console.log(`  Blog:  ${blogResult.imported} imported, ${blogResult.skipped} skipped`);
+  console.log(`  Daily: ${dailyResult.imported} imported, ${dailyResult.skipped} skipped`);
+  console.log(`  Total: ${totalImported} imported, ${totalSkipped} skipped`);
 }
 
 main();

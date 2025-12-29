@@ -1,0 +1,165 @@
+---
+import { type CollectionEntry, getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('daily');
+  return entries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: entry,
+  }));
+}
+
+type Props = CollectionEntry<'daily'>;
+
+const entry = Astro.props;
+const { Content } = await entry.render();
+
+const formatDate = (date: Date) => {
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+};
+
+const title = formatDate(entry.data.date);
+---
+
+<Layout title={`${title} - Daily - Takafumi Miyanaga`}>
+  <Header />
+
+  <main class="max-w-xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
+    <!-- Back link -->
+    <a
+      href="/daily"
+      class="inline-block text-xs sm:text-sm mb-8 sm:mb-12 opacity-60 hover:opacity-100 transition-opacity"
+      style="color: var(--text-primary);"
+    >
+      ← back
+    </a>
+
+    <article>
+      <!-- Header -->
+      <header class="mb-8 sm:mb-12">
+        <div class="flex items-center justify-between mb-2">
+          <time class="text-lg sm:text-xl font-medium" style="color: var(--text-primary);">
+            {formatDate(entry.data.date)}
+          </time>
+          <div class="flex items-center rounded overflow-hidden text-xs" style="background-color: var(--bg-tertiary);">
+            <button
+              id="lang-en"
+              class="lang-btn px-2 py-1 transition-opacity"
+              data-lang="en"
+            >
+              EN
+            </button>
+            <button
+              id="lang-ja"
+              class="lang-btn px-2 py-1 transition-opacity"
+              data-lang="ja"
+            >
+              JA
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Content -->
+      <div class="prose">
+        <Content />
+      </div>
+    </article>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  function initLangSwitcher() {
+    const buttons = document.querySelectorAll('.lang-btn');
+    const prose = document.querySelector('.prose');
+
+    const savedLang = localStorage.getItem('blog-lang') || 'en';
+    setLang(savedLang);
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const lang = btn.getAttribute('data-lang');
+        if (lang) {
+          setLang(lang);
+          localStorage.setItem('blog-lang', lang);
+        }
+      });
+    });
+
+    function setLang(lang: string) {
+      // Update buttons
+      buttons.forEach(btn => {
+        const isActive = btn.getAttribute('data-lang') === lang;
+        if (isActive) {
+          btn.style.backgroundColor = 'var(--accent)';
+          btn.style.color = 'var(--bg-primary)';
+          btn.style.opacity = '1';
+        } else {
+          btn.style.backgroundColor = 'transparent';
+          btn.style.color = 'var(--text-secondary)';
+          btn.style.opacity = '0.4';
+        }
+      });
+
+      // Update content sections
+      if (prose) {
+        const sections = prose.querySelectorAll('[data-lang]');
+        if (sections.length > 0) {
+          sections.forEach(section => {
+            const sectionEl = section as HTMLElement;
+            sectionEl.style.display = section.getAttribute('data-lang') === lang ? 'block' : 'none';
+          });
+        }
+      }
+    }
+  }
+
+  initLangSwitcher();
+  document.addEventListener('astro:after-swap', initLangSwitcher);
+</script>
+
+<style is:global>
+  .prose {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    font-size: 0.9375rem;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  @media (min-width: 640px) {
+    .prose {
+      font-size: 1rem;
+    }
+  }
+
+  .prose p {
+    margin-bottom: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .prose p {
+      margin-bottom: 1.25rem;
+    }
+  }
+
+  .prose a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .prose a:hover {
+    color: var(--accent-secondary);
+    opacity: 1;
+  }
+</style>
