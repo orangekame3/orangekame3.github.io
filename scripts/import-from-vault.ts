@@ -129,8 +129,8 @@ function importContent(
     }
 
     const copiedImages = new Set<string>();
-    let processedBody = convertWikiLinks(body);
-    processedBody = extractAndConvertImages(processedBody, copiedImages);
+    let processedBody = extractAndConvertImages(body, copiedImages);
+    processedBody = convertWikiLinks(processedBody);
 
     const slug = generateSlug(file);
     const newFrontmatter = generateAstroFrontmatter(rawFrontmatter);

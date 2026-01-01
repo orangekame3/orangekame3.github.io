@@ -39,6 +39,7 @@ publish: true
 1. Read the `::ja` section to understand what the user wants to express
 2. Read the `<!-- draft: -->` to see their English attempt
 3. Identify errors and areas for improvement
+4. Note any image embeds (`![[image.jpg]]`) in the `::ja` section
 
 ### Step 2: Provide Review Notes
 Add corrections to the `<!-- review: -->` section in this format:
@@ -48,6 +49,9 @@ Add corrections to the `<!-- review: -->` section in this format:
 
 ### Step 3: Generate Final Version
 Write the polished English version after the review comments.
+
+### Step 4: Include Images
+Copy any image embeds from the `::ja` section to the end of the `::en` section to maintain visual consistency.
 
 ## Review Priorities
 
