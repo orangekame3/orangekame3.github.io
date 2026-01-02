@@ -254,5 +254,3 @@ I've given my smart mirror application a major overhaul. I'll share the technica
 - "I report the detail of technical content in near future" → "I'll share the technical details in future posts" (more natural)
 
 -->
-
-
