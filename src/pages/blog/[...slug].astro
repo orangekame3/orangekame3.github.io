@@ -208,8 +208,13 @@ const formatDate = (date: Date) => {
       const titles = document.querySelectorAll('.title-text');
       const prose = document.querySelector('.prose');
 
+      // Get language from URL query param, localStorage, or default to 'en'
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlLang = urlParams.get('lang');
       const savedLang = localStorage.getItem('blog-lang') || 'en';
-      setLang(savedLang);
+      const initialLang = urlLang || savedLang;
+
+      setLang(initialLang);
 
       buttons.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -217,6 +222,15 @@ const formatDate = (date: Date) => {
           if (lang) {
             setLang(lang);
             localStorage.setItem('blog-lang', lang);
+
+            // Update URL without reload
+            const url = new URL(window.location.href);
+            if (lang === 'en') {
+              url.searchParams.delete('lang');
+            } else {
+              url.searchParams.set('lang', lang);
+            }
+            history.pushState({}, '', url.toString());
           }
         });
       });
@@ -253,6 +267,13 @@ const formatDate = (date: Date) => {
           }
         }
       }
+
+      // Handle browser back/forward
+      window.addEventListener('popstate', () => {
+        const params = new URLSearchParams(window.location.search);
+        const lang = params.get('lang') || 'en';
+        setLang(lang);
+      });
     }
 
     initLangSwitcher();
