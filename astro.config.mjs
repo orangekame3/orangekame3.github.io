@@ -5,6 +5,8 @@ import remarkBreaks from 'remark-breaks';
 import { remarkLangSections } from './src/plugins/remark-lang-sections.ts';
 import { remarkInstagram } from './src/plugins/remark-instagram.ts';
 import { remarkYoutube } from './src/plugins/remark-youtube.ts';
+import { remarkGithubVideo } from './src/plugins/remark-github-video.ts';
+import { remarkGithubCard } from './src/plugins/remark-github-card.ts';
 import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
@@ -15,6 +17,6 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
   markdown: {
-    remarkPlugins: [remarkBreaks, remarkLangSections, remarkInstagram, remarkYoutube]
+    remarkPlugins: [remarkBreaks, remarkLangSections, remarkInstagram, remarkYoutube, remarkGithubCard, remarkGithubVideo]
   }
 });

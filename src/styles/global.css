@@ -181,3 +181,123 @@ a:hover {
     font-size: 0.8125rem;
   }
 }
+
+/* GitHub repository card */
+.github-card {
+  display: block;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.github-card:hover {
+  border-color: var(--accent);
+  background: var(--bg-tertiary);
+  opacity: 1;
+}
+
+.github-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.github-card-icon {
+  width: 1rem;
+  height: 1rem;
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+}
+
+.github-card-name {
+  font-weight: 600;
+  color: var(--accent);
+  font-size: 0.9375rem;
+}
+
+.github-card-desc {
+  margin: 0 0 0.75rem 0;
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.github-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+.github-card-lang {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.github-card-lang-dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  background: var(--text-tertiary);
+}
+
+.github-card-lang-dot[data-lang="Go"] { background: #00ADD8; }
+.github-card-lang-dot[data-lang="TypeScript"] { background: #3178C6; }
+.github-card-lang-dot[data-lang="JavaScript"] { background: #F7DF1E; }
+.github-card-lang-dot[data-lang="Python"] { background: #3572A5; }
+.github-card-lang-dot[data-lang="Rust"] { background: #DEA584; }
+.github-card-lang-dot[data-lang="Ruby"] { background: #701516; }
+.github-card-lang-dot[data-lang="Java"] { background: #B07219; }
+.github-card-lang-dot[data-lang="C"] { background: #555555; }
+.github-card-lang-dot[data-lang="C++"] { background: #F34B7D; }
+.github-card-lang-dot[data-lang="Shell"] { background: #89E051; }
+.github-card-lang-dot[data-lang="HTML"] { background: #E34C26; }
+.github-card-lang-dot[data-lang="CSS"] { background: #563D7C; }
+.github-card-lang-dot[data-lang="Astro"] { background: #FF5A03; }
+
+.github-card-stat {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.github-card-stat svg {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+@media (min-width: 640px) {
+  .github-card {
+    margin: 2rem 0;
+    padding: 1.25rem;
+  }
+}
+
+/* GitHub video embed */
+.github-video-embed {
+  margin: 1.5rem 0;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.github-video-embed video {
+  width: 100%;
+  display: block;
+  background: var(--bg-tertiary);
+}
+
+@media (min-width: 640px) {
+  .github-video-embed {
+    margin: 2rem 0;
+  }
+}
