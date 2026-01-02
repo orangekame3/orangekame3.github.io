@@ -267,6 +267,8 @@ const formatDate = (date: Date) => {
     font-size: 0.9375rem;
     word-break: break-word;
     overflow-wrap: break-word;
+    max-width: 100%;
+    overflow-x: hidden;
   }
 
   @media (min-width: 640px) {
@@ -330,6 +332,10 @@ const formatDate = (date: Date) => {
 
   .prose .github-card {
     text-decoration: none;
+    display: block;
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .prose ul, .prose ol {
