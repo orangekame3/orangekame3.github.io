@@ -77,6 +77,14 @@ https://github.com/user-attachments/assets/c9005df4-9bdb-4190-861e-c8f5f9290468
 
 機能の設定などはなるべくYAMLで制御できるように気を使った。LLMのプロバイダ設定、キャラクターのシステムプロンプト、機能を組み合わせたワークフローの設定などができる。
 
+ちなみにLLMのモデルだが日本語を使うという観点では`hf.co/rinna/qwen2.5-bakeneko-32b-instruct-gguf:Q8_0`がちょうど良かった。TTSについてもOpenAIをつかうよりもVOICEVOXのほうが自然なイントネーションという観点では良かった。
+
+mirrormate自体はOpenAIのAPIを使って以下のコマンドで気軽に試せるので使ってみていただきたい。ブラウザはChrome推奨である。
+
+```shell
+docker run -p 3000:3000 -e OPENAI_API_KEY=sk-your-key -e LLM_PROVIDER=openai -e TTS_PROVIDER=openai ghcr.io/orangekame3/mirrormate:latest
+```
+
 ## まとめ
 
 スマートミラーのアプリケーションを大幅に更新した。技術的な詳細については今後小出しにまとめていこうと思う。
@@ -102,6 +110,7 @@ Since, Ollama and VOICEVOX was provided as open-sourced, so I cut off my cost ex
 - Magic mirror
 - Wood
 - Display monitor
+- Raspberry Pi
 
 #### Magic mirror
 
@@ -128,6 +137,10 @@ It's easy to imagine Gemini or ChatGPT has an voice recognition User Interface. 
 
 I cared about that setting can be able to control with YAML. You can change the provider setting and a system prompt and workflow of composite of features.
 
+About the LLM model, hf.co/rinna/qwen2.5-bakeneko-32b-instruct-gguf:Q8_0 is good for Japanese. About TTS, VOICEVOX is better than OpenAI.
+
+mirrormate can be tried easily with OpenAI API using the following command. Chrome is recommended.
+
 ## Wrap up
 
 I update the application of the smart mirror. I report the detail of technical content in near future.
@@ -153,6 +166,7 @@ Since both Ollama and VOICEVOX are free and open-source, the only ongoing cost i
 - Magic mirror
 - Wood
 - Display monitor
+- Raspberry Pi
 
 #### Magic Mirror
 
@@ -203,6 +217,14 @@ Think of it as something like Gemini or ChatGPT's voice feature, but with a visu
 
 I made sure that settings can be configured through YAML files. You can customize the LLM provider, character system prompts, and workflows that combine multiple features.
 
+As for the LLM model, I found `hf.co/rinna/qwen2.5-bakeneko-32b-instruct-gguf:Q8_0` works well for Japanese. For TTS, VOICEVOX produces more natural-sounding intonation compared to OpenAI's offering.
+
+You can try MirrorMate easily using the OpenAI API with the following command. Chrome is recommended as the browser.
+
+```shell
+docker run -p 3000:3000 -e OPENAI_API_KEY=sk-your-key -e LLM_PROVIDER=openai -e TTS_PROVIDER=openai ghcr.io/orangekame3/mirrormate:latest
+```
+
 ## Wrap Up
 
 I've given my smart mirror application a major overhaul. I'll share the technical details in future posts.
@@ -223,6 +245,7 @@ I've given my smart mirror application a major overhaul. I'll share the technica
 
 ### Materials
 - "Ingredient" → "Materials" (ingredients are for cooking; materials for building)
+- Added "Raspberry Pi" (ラズパイ) - missing from original draft
 
 ### Magic Mirror section
 - Missing content about where purchased (鏡の販売.com) and the price details from invoice
@@ -249,8 +272,16 @@ I've given my smart mirror application a major overhaul. I'll share the technica
 - "I cared about that setting can be able to control with YAML" → "I made sure that settings can be configured through YAML files" (clearer)
 - "a system prompt and workflow of composite of features" → "character system prompts, and workflows that combine multiple features" (JA: キャラクターのシステムプロンプト、機能を組み合わせたワークフロー)
 
+### LLM Model & TTS (NEW)
+- "About the LLM model, hf.co/rinna/qwen2.5-bakeneko-32b-instruct-gguf:Q8_0 is good for Japanese" → "As for the LLM model, I found `hf.co/rinna/qwen2.5-bakeneko-32b-instruct-gguf:Q8_0` works well for Japanese" (JA: 日本語を使うという観点では〜がちょうど良かった; more natural phrasing + code formatting)
+- "About TTS, VOICEVOX is better than OpenAI" → "For TTS, VOICEVOX produces more natural-sounding intonation compared to OpenAI's offering" (JA: VOICEVOXのほうが自然なイントネーションという観点では良かった; captures the specific nuance about intonation)
+
+### Docker Command (NEW)
+- "mirrormate can be tried easily with OpenAI API using the following command. Chrome is recommended." → "You can try MirrorMate easily using the OpenAI API with the following command. Chrome is recommended as the browser." (JA: 気軽に試せる; more natural phrasing)
+
 ### Wrap up
 - "I update the application" → "I've given my smart mirror application a major overhaul" (JA: 大幅に更新した = significantly updated)
 - "I report the detail of technical content in near future" → "I'll share the technical details in future posts" (more natural)
 
 -->
+
