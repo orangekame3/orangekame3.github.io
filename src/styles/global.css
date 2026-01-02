@@ -306,6 +306,8 @@ a:hover {
   border: 1px solid var(--border-color);
   border-radius: 0.5rem;
   overflow: hidden;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .github-video-embed video {
