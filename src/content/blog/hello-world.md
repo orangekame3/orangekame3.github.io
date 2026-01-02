@@ -4,6 +4,7 @@ title_en: Hello World
 desc_ja: 最初のブログ記事です。Astroで構築した新しいブログへようこそ。
 desc_en: This is my first blog post. Welcome to my new blog built with Astro.
 date: 2025-12-27
+updatedAt:
 ---
 
 ::en

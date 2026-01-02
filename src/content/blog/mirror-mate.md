@@ -4,6 +4,7 @@ title_en: MirrorMate - My Partner in the Mirror
 desc_ja: スマートミラーを作りました
 desc_en: I built a handmade smart mirror
 date: 2026-01-02
+updatedAt:
 pinned: false
 ---
 

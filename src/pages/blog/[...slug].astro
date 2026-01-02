@@ -55,9 +55,17 @@ const formatDate = (date: Date) => {
       <!-- Header -->
       <header class="mb-8 sm:mb-12">
         <div class="flex items-center justify-between mb-2">
-          <time class="text-xs sm:text-sm" style="color: var(--text-tertiary);">
-            {formatDate(post.data.date)}
-          </time>
+          <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-3 text-xs sm:text-sm" style="color: var(--text-tertiary);">
+            <time>
+              {formatDate(post.data.date)}
+            </time>
+            {post.data.updatedAt && (
+              <span class="flex items-center gap-1">
+                <span class="hidden sm:inline">·</span>
+                <span>Updated: {formatDate(post.data.updatedAt)}</span>
+              </span>
+            )}
+          </div>
           {hasMultiLang && (
             <div class="flex items-center rounded overflow-hidden text-xs" style="background-color: var(--bg-tertiary);">
               <button
@@ -299,25 +307,29 @@ const formatDate = (date: Date) => {
     }
   }
 
-  .prose p {
+  .prose p:not(.github-card-desc) {
     margin-bottom: 1rem;
   }
 
   @media (min-width: 640px) {
-    .prose p {
+    .prose p:not(.github-card-desc) {
       margin-bottom: 1.25rem;
     }
   }
 
-  .prose a {
+  .prose a:not(.github-card) {
     color: var(--accent);
     text-decoration: underline;
     text-underline-offset: 2px;
   }
 
-  .prose a:hover {
+  .prose a:not(.github-card):hover {
     color: var(--accent-secondary);
     opacity: 1;
+  }
+
+  .prose .github-card {
+    text-decoration: none;
   }
 
   .prose ul, .prose ol {

@@ -4,6 +4,7 @@ title_en: Two Years Working on Quantum Computer System Software
 desc_ja: QIQBに転職してからの2年の振り返り
 desc_en: Reflecting on two years since joining QIQB
 date: 2025-12-28
+updatedAt:
 pinned: true
 ---
 
