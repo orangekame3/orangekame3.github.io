@@ -125,7 +125,7 @@ export const GET: APIRoute = async ({ props }) => {
                       fontFamily: 'JetBrains Mono, Noto Sans JP',
                       color: textTertiary,
                     },
-                    children: 'orangekame3.net',
+                    children: 'orangekame3.dev',
                   },
                 },
               ],

@@ -11,7 +11,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://www.orangekame3.net',
+  site: 'https://www.orangekame3.dev',
   integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()]
