@@ -21,7 +21,7 @@ const hasMultiLang = !!(post.data.title_ja && post.data.title_en);
 const defaultTitle = post.data.title_en || post.data.title_ja || 'Untitled';
 const defaultDesc = post.data.desc_en || post.data.desc_ja || '';
 const ogImage = `/og/${post.slug}.png`;
-const siteUrl = 'https://www.orangekame3.dev';
+const siteUrl = 'https://orangekame3.dev';
 const postUrl = `${siteUrl}/blog/${post.slug}`;
 const xShareText = `blogged.\n---\n${defaultTitle}`;
 const xShareUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(xShareText)}&url=${encodeURIComponent(postUrl)}`;

@@ -8,7 +8,7 @@ interface Props {
 }
 
 const { title, description = '宮永崇史 (Takafumi Miyanaga) - 大阪大学QIQB 量子コンピュータシステム開発者・研究者。OQTOPUSプロジェクト開発者。', ogImage } = Astro.props;
-const siteUrl = 'https://www.orangekame3.dev';
+const siteUrl = 'https://orangekame3.dev';
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
 const image = ogImage ? `${siteUrl}${ogImage}` : `${siteUrl}/og/index.png`;
 const keywords = '宮永崇史, Takafumi Miyanaga, OQTOPUS, 量子コンピュータ, quantum computing, quantum computer, 量子計算, 量子情報, quantum information, 大阪大学, Osaka University, QIQB, orangekame3, 超伝導量子ビット, superconducting qubit, クラウド量子コンピュータ, cloud quantum computing';

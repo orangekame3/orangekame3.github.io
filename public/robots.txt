@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.orangekame3.dev/sitemap-index.xml
+Sitemap: https://orangekame3.dev/sitemap-index.xml
