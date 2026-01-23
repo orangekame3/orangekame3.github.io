@@ -1,8 +1,8 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
-import { projects } from '../src/data/projects';
-import { githubStars } from '../src/data/projectStars';
+import { projects } from '../src/data/projects.ts';
+import { githubStars } from '../src/data/projectStars.ts';
 
 type Repo = `${string}/${string}`;
 
@@ -65,4 +65,3 @@ main().catch((e) => {
   console.error(e);
   process.exit(1);
 });
-

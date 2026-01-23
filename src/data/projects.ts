@@ -1,4 +1,4 @@
-import { githubStars } from './projectStars';
+import { githubStars } from './projectStars.ts';
 
 export interface Project {
   title: string;
