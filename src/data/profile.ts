@@ -5,5 +5,11 @@ export const profile = {
     'Focused on the intersection of quantum computing and cloud architecture.',
     'Building systems that bridge theoretical research with practical implementation.',
   ],
+  cvSummary: [
+    'Software developer and researcher specializing in quantum computing systems and cloud architecture.',
+    'Lead developer of OQTOPUS, an open-source quantum computer operating system powering Japan\'s first fully domestic quantum computer.',
+    'Expertise in Go, Python, and cloud infrastructure (AWS, Terraform) with a background in physics (M.S., superconducting quantum circuits).',
+    'Active contributor to the open-source community with multiple published CLI tools and technical translations.',
+  ],
   avatar: '/profile.jpg',
 };

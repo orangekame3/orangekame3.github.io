@@ -7,6 +7,9 @@ import { publications } from '../data/publications';
 import { talks } from '../data/talks';
 import { service } from '../data/service';
 import { careers } from '../data/career';
+import { profile } from '../data/profile';
+import { socials } from '../data/socials';
+import { projects } from '../data/projects';
 
 const education = careers.filter((c) => c.role.includes('B.S.') || c.role.includes('M.S.') || c.role.includes('Ph.D.'));
 const experience = careers.filter((c) => !c.role.includes('B.S.') && !c.role.includes('M.S.') && !c.role.includes('Ph.D.'));
@@ -14,6 +17,8 @@ const experience = careers.filter((c) => !c.role.includes('B.S.') && !c.role.inc
 const invited = talks.filter((t) => t.type === 'invited').sort((a, b) => b.date.localeCompare(a.date));
 const conference = talks.filter((t) => t.type === 'conference').sort((a, b) => b.date.localeCompare(a.date));
 const poster = talks.filter((t) => t.type === 'poster').sort((a, b) => b.date.localeCompare(a.date));
+
+const cvSocials = socials.filter((s) => ['email', 'linkedin', 'github'].includes(s.icon));
 ---
 
 <Layout title="CV - Takafumi Miyanaga">
@@ -21,9 +26,22 @@ const poster = talks.filter((t) => t.type === 'poster').sort((a, b) => b.date.lo
 
   <main class="max-w-xl mx-auto px-4 sm:px-6 py-12 sm:py-16 cv-content">
     <div class="flex justify-between items-start mb-8">
-      <h1 class="text-lg sm:text-xl font-medium" style="color: var(--text-primary);">
-        Takafumi Miyanaga
-      </h1>
+      <div class="space-y-1">
+        <h1 class="text-lg sm:text-xl font-medium" style="color: var(--text-primary);">
+          Takafumi Miyanaga
+        </h1>
+        <div class="flex flex-wrap gap-x-3 gap-y-1 text-xs" style="color: var(--text-tertiary);">
+          {cvSocials.map((s) => (
+            <a
+              href={s.href}
+              class="hover:opacity-60 transition-opacity"
+              style="color: var(--accent);"
+            >
+              {s.name}
+            </a>
+          ))}
+        </div>
+      </div>
       <button
         onclick="window.print()"
         class="text-xs px-3 py-1.5 rounded print:hidden hover:opacity-60 transition-opacity"
@@ -33,36 +51,31 @@ const poster = talks.filter((t) => t.type === 'poster').sort((a, b) => b.date.lo
       </button>
     </div>
 
-    <p class="text-sm mb-8" style="color: var(--text-secondary);">
-      Specially Appointed Researcher at Center for Quantum Information and Quantum Biology (QIQB), Osaka University.
-      Working on quantum computer system development, cloud quantum computing platforms, and open-source software.
-    </p>
-
-    <!-- Education -->
-    <section class="mb-8">
-      <h2 class="text-sm sm:text-base mb-3" style="color: var(--text-tertiary);">
-        <span style="color: var(--accent);">##</span> Education
-      </h2>
-      <div class="space-y-2">
-        {education.map((edu) => (
-          <div class="flex justify-between text-sm" style="color: var(--text-secondary);">
-            <span>{edu.title}, {edu.role}</span>
-            <span style="color: var(--text-tertiary);">{edu.period}</span>
-          </div>
-        ))}
-      </div>
-    </section>
+    <div class="space-y-1 mb-8">
+      {profile.cvSummary.map((line) => (
+        <p class="text-sm" style="color: var(--text-secondary);">{line}</p>
+      ))}
+    </div>
 
     <!-- Experience -->
     <section class="mb-8">
       <h2 class="text-sm sm:text-base mb-3" style="color: var(--text-tertiary);">
         <span style="color: var(--accent);">##</span> Experience
       </h2>
-      <div class="space-y-2">
+      <div class="space-y-4">
         {experience.map((exp) => (
-          <div class="flex justify-between text-sm" style="color: var(--text-secondary);">
-            <span>{exp.title}, {exp.role}</span>
-            <span style="color: var(--text-tertiary);">{exp.period}</span>
+          <div>
+            <div class="flex justify-between text-sm" style="color: var(--text-secondary);">
+              <span class="font-medium">{exp.title}, {exp.role}</span>
+              <span style="color: var(--text-tertiary);">{exp.period}</span>
+            </div>
+            {exp.description && (
+              <ul class="mt-1 ml-4 space-y-0.5">
+                {exp.description.map((item) => (
+                  <li class="text-xs" style="color: var(--text-tertiary);">• {item}</li>
+                ))}
+              </ul>
+            )}
           </div>
         ))}
       </div>
@@ -77,6 +90,44 @@ const poster = talks.filter((t) => t.type === 'poster').sort((a, b) => b.date.lo
         {skillCategories.map((category) => (
           <div class="text-sm" style="color: var(--text-secondary);">
             <span style="color: var(--text-tertiary);">{category.name}:</span> {category.skills.join(', ')}
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="mb-8">
+      <h2 class="text-sm sm:text-base mb-3" style="color: var(--text-tertiary);">
+        <span style="color: var(--accent);">##</span> Projects (Selected)
+      </h2>
+      <ul class="space-y-1.5 text-sm" style="color: var(--text-secondary);">
+        {projects.map((p) => (
+          <li>
+            <span class="font-medium">{p.title}</span>
+            <span style="color: var(--text-tertiary);"> — {p.description}</span>
+            <span style="color: var(--text-tertiary);"> — </span>
+            <a
+              href={p.link}
+              class="hover:opacity-60 transition-opacity"
+              style="color: var(--accent);"
+            >
+              {p.link}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <!-- Education -->
+    <section class="mb-8">
+      <h2 class="text-sm sm:text-base mb-3" style="color: var(--text-tertiary);">
+        <span style="color: var(--accent);">##</span> Education
+      </h2>
+      <div class="space-y-2">
+        {education.map((edu) => (
+          <div class="flex justify-between text-sm" style="color: var(--text-secondary);">
+            <span>{edu.title}, {edu.role}</span>
+            <span style="color: var(--text-tertiary);">{edu.period}</span>
           </div>
         ))}
       </div>
