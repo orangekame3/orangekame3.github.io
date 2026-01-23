@@ -28,7 +28,7 @@ const projectBase: Omit<Project, 'stars'>[] = [
   },
   {
     title: 'qdash',
-    description: 'Quantum job dashboard (OQTOPUS)',
+    description: 'Large scale superconducting qubit calibration platform',
     link: 'https://github.com/oqtopus-team/qdash',
     repo: 'oqtopus-team/qdash',
   },
