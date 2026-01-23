@@ -59,11 +59,13 @@ const projectBase: Omit<Project, 'stars'>[] = [
     title: 'tftarget',
     description: 'Interactive Terraform target selector',
     link: 'https://github.com/future-architect/tftarget',
+    repo: 'future-architect/tftarget',
   },
   {
     title: 'paclear',
     description: 'Terminal clear with PAC-MAN animation',
     link: 'https://github.com/orangekame3/paclear',
+    repo: 'orangekame3/paclear',
   },
   {
     title: 'stree',
@@ -75,6 +77,7 @@ const projectBase: Omit<Project, 'stars'>[] = [
     title: 'ghfetch',
     description: 'GitHub profile fetcher',
     link: 'https://github.com/orangekame3/ghfetch',
+    repo: 'orangekame3/ghfetch',
   },
 ];
 
