@@ -118,8 +118,15 @@ const cvSocials = socials.filter((s) => ['email', 'linkedin', 'github'].includes
         {projects.map((p) => (
           <li>
             <span class="font-medium">{p.title}</span>
-            {typeof p.stars === 'number' && (
-              <span class="tabular-nums" style="color: var(--text-tertiary);"> ★ {p.stars.toLocaleString()}</span>
+            {p.repo && (
+              <span
+                class="tabular-nums"
+                style="color: var(--text-tertiary);"
+                title={p.stars === null ? 'Star count updates periodically' : undefined}
+              >
+                {' '}
+                ★ {typeof p.stars === 'number' ? p.stars.toLocaleString() : '—'}
+              </span>
             )}
             <span style="color: var(--text-tertiary);"> — {p.description}</span>
             <span style="color: var(--text-tertiary);"> — </span>

@@ -19,9 +19,13 @@ import { projects } from '../data/projects';
           <h3 class="text-sm sm:text-base font-medium group-hover:opacity-60 transition-opacity" style="color: var(--text-primary);">
             {project.title}
           </h3>
-          {typeof project.stars === 'number' && (
-            <span class="text-xs tabular-nums" style="color: var(--text-tertiary);">
-              ★ {project.stars.toLocaleString()}
+          {project.repo && (
+            <span
+              class="text-xs tabular-nums"
+              style="color: var(--text-tertiary);"
+              title={project.stars === null ? 'Star count updates periodically' : undefined}
+            >
+              ★ {typeof project.stars === 'number' ? project.stars.toLocaleString() : '—'}
             </span>
           )}
         </div>
