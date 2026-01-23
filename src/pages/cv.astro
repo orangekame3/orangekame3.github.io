@@ -57,6 +57,20 @@ const cvSocials = socials.filter((s) => ['email', 'linkedin', 'github'].includes
       ))}
     </div>
 
+    <!-- Languages -->
+    {profile.languages && profile.languages.length > 0 && (
+      <section class="mb-8">
+        <h2 class="text-sm sm:text-base mb-3" style="color: var(--text-tertiary);">
+          <span style="color: var(--accent);">##</span> Languages
+        </h2>
+        <ul class="space-y-1.5 text-sm" style="color: var(--text-secondary);">
+          {profile.languages.map((l) => (
+            <li>{l}</li>
+          ))}
+        </ul>
+      </section>
+    )}
+
     <!-- Experience -->
     <section class="mb-8">
       <h2 class="text-sm sm:text-base mb-3" style="color: var(--text-tertiary);">
