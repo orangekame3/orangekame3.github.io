@@ -15,9 +15,16 @@ import { projects } from '../data/projects';
         rel="noopener noreferrer"
         class="block group"
       >
-        <h3 class="text-sm sm:text-base font-medium group-hover:opacity-60 transition-opacity" style="color: var(--text-primary);">
-          {project.title}
-        </h3>
+        <div class="flex items-baseline justify-between gap-3">
+          <h3 class="text-sm sm:text-base font-medium group-hover:opacity-60 transition-opacity" style="color: var(--text-primary);">
+            {project.title}
+          </h3>
+          {typeof project.stars === 'number' && (
+            <span class="text-xs tabular-nums" style="color: var(--text-tertiary);">
+              ★ {project.stars.toLocaleString()}
+            </span>
+          )}
+        </div>
         <p class="text-xs sm:text-sm mt-0.5 sm:mt-1" style="color: var(--text-tertiary);">
           {project.description}
         </p>

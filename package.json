@@ -8,7 +8,8 @@
     "preview": "astro preview",
     "astro": "astro",
     "import": "npx ts-node --esm scripts/journal-to-blog.ts",
-    "import:vault": "npx tsx scripts/import-from-vault.ts"
+    "import:vault": "npx tsx scripts/import-from-vault.ts",
+    "stars:update": "npx ts-node --esm scripts/update-github-stars.ts"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.15",
