@@ -1,0 +1,56 @@
+# Takafumi Miyanaga (宮永崇史)
+
+> Software Developer & Researcher specializing in quantum computing systems and cloud architecture
+
+## About
+
+Takafumi Miyanaga (宮永崇史) is a software developer and researcher at Osaka University QIQB, specializing in quantum computing systems and cloud architecture. He is the lead developer of OQTOPUS, an open-source quantum computer operating system powering Japan's first fully domestic quantum computer.
+
+## Key Projects
+
+- OQTOPUS: Open Quantum Toolchain for OPerators & USers - https://oqtopus-team.github.io/
+- oqtopus-cloud: Cloud-based quantum computing platform - https://github.com/oqtopus-team/oqtopus-cloud
+- mirrormate: Your partner in the mirror - https://github.com/orangekame3/mirrormate
+- tftarget: Interactive Terraform target selector - https://github.com/future-architect/tftarget
+
+## Expertise
+
+- Programming Languages: Go (Golang), Python, TypeScript/JavaScript
+- Quantum Computing: OpenQASM 3.0, Superconducting Qubits, Cloud Quantum Computing
+- Cloud & Infrastructure: AWS, Terraform, Docker, CI/CD
+- Open Source Software Development
+
+## Education & Career
+
+- 2023 - Present: Specially Appointed Researcher, Osaka University QIQB
+- 2021 - 2023: Backend Engineer & Consultant, Future Corporation
+- 2019 - 2021: M.S. Physics, Tokyo University of Science (Superconducting Quantum Circuits)
+- 2015 - 2019: B.S. Physics, Tokyo University of Science
+
+## Publications
+
+- IEEE QCE 2025: "A Practical Open-Source Software Stack for a Cloud-Based Quantum Computing System"
+- Physical Review Applied 2021: "Ultrastrong Tunable Coupler Between Superconducting LC Resonators"
+- Translation: "Software Mistakes and Tradeoffs" (O'Reilly Japan, 2023)
+
+## Contact
+
+- Website: https://orangekame3.dev
+- GitHub: https://github.com/orangekame3
+- Twitter: https://twitter.com/orangekame3
+- LinkedIn: https://www.linkedin.com/in/takafumi-miyanaga-4476131a6
+- Email: contact@orangekame3.dev
+- Zenn: https://zenn.dev/orangekame
+
+## Site Structure
+
+- / - Home page with profile and latest posts
+- /blog/ - Technical blog posts (English/Japanese)
+- /daily/ - Daily journal entries
+- /cv/ - Curriculum Vitae (PDF available)
+- /talks/ - Conference talks and presentations
+
+## Languages
+
+- Japanese (Native)
+- English (Professional working proficiency)
