@@ -18,12 +18,9 @@ const titleText = profile.title.toLowerCase();
     </div>
 
     <!-- Name -->
-    <h1 class="text-xl sm:text-2xl md:text-3xl font-medium mb-2 sm:mb-3" style="color: var(--text-primary);">
-      <span style="color: var(--accent);">~/</span>{profile.name.toLowerCase().replace(' ', '-')}
+    <h1 class="text-xl sm:text-2xl md:text-3xl font-medium mb-4 sm:mb-5" style="color: var(--text-primary);">
+      <span style="color: var(--accent);">~/</span>{profile.name.toLowerCase().replace(' ', '-')} <span style="color: var(--text-secondary); font-weight: 400;">({profile.nameJa})</span>
     </h1>
-    <p class="text-sm sm:text-base mb-4 sm:mb-5" style="color: var(--text-secondary);">
-      {profile.nameJa}
-    </p>
 
     <!-- Title with typing animation -->
     <p class="text-xs sm:text-sm mb-8 sm:mb-10" style="color: var(--text-tertiary);">
