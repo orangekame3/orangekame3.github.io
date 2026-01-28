@@ -7,9 +7,9 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "import": "npx ts-node --esm scripts/journal-to-blog.ts",
+    "import": "npx tsx scripts/journal-to-blog.ts",
     "import:vault": "npx tsx scripts/import-from-vault.ts",
-    "stars:update": "npx ts-node --esm scripts/update-github-stars.ts"
+    "stars:update": "npx tsx scripts/update-github-stars.ts"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.15",
@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "@types/node": "^25.0.3",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "tsx": "^4.19.2"
   }
 }
