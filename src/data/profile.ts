@@ -1,5 +1,6 @@
 export const profile = {
   name: 'Takafumi Miyanaga',
+  nameJa: '宮永崇史',
   title: 'Software Developer & Researcher',
   bio: [
     'Focused on the intersection of quantum computing and cloud architecture.',
