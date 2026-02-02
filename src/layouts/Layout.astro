@@ -7,11 +7,11 @@ interface Props {
   ogImage?: string;
 }
 
-const { title, description = '宮永崇史 (Takafumi Miyanaga) - 大阪大学QIQB 量子コンピュータシステム開発者・研究者。OQTOPUSプロジェクト開発者。', ogImage } = Astro.props;
+const { title, description = 'Takafumi Miyanaga (宮永 崇史) - 大阪大学QIQB 量子コンピュータシステム開発者・研究者。OQTOPUSプロジェクト開発者。', ogImage } = Astro.props;
 const siteUrl = 'https://orangekame3.dev';
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
 const image = ogImage ? `${siteUrl}${ogImage}` : `${siteUrl}/og/index.png`;
-const keywords = '宮永崇史, Takafumi Miyanaga, OQTOPUS, 量子コンピュータ, quantum computing, quantum computer, 量子計算, 量子情報, quantum information, 大阪大学, Osaka University, QIQB, orangekame3, 超伝導量子ビット, superconducting qubit, クラウド量子コンピュータ, cloud quantum computing';
+const keywords = 'Takafumi Miyanaga, 宮永 崇史, 宮永崇史, OQTOPUS, 量子コンピュータ, quantum computing, quantum computer, 量子計算, 量子情報, quantum information, 大阪大学, Osaka University, QIQB, orangekame3, 超伝導量子ビット, superconducting qubit, クラウド量子コンピュータ, cloud quantum computing';
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -47,14 +47,14 @@ const jsonLd = {
     <!-- SEO -->
     <meta name="description" content={description} />
     <meta name="keywords" content={keywords} />
-    <meta name="author" content="宮永崇史 (Takafumi Miyanaga)" />
+    <meta name="author" content="Takafumi Miyanaga (宮永 崇史)" />
     <meta name="google-site-verification" content="Z8pILx7d8nW8TM_Hf_xzytUBBPyNO9lgu-ImPPNbfFQ" />
 
     <!-- OGP -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:site_name" content="宮永崇史 | Takafumi Miyanaga" />
+    <meta property="og:site_name" content="Takafumi Miyanaga | 宮永 崇史" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content={image} />
     <meta property="og:locale" content="ja_JP" />
