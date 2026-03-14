@@ -7,7 +7,6 @@ on:
 
 permissions:
   contents: write
-  pull-requests: write
 
 jobs:
   update:
@@ -30,14 +29,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm run stars:update
 
-      - name: Create PR if changed
-        uses: peter-evans/create-pull-request@v6
-        with:
-          commit-message: "chore: update GitHub stars"
-          title: "chore: update GitHub stars"
-          body: "Automated weekly refresh of GitHub star counts."
-          branch: "chore/update-github-stars"
-          delete-branch: true
-          add-paths: |
-            src/data/projectStars.ts
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/projectStars.ts
+          git diff --cached --quiet || git commit -m "chore: update GitHub stars" && git push
 
