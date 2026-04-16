@@ -7,6 +7,12 @@ export interface Publication {
 
 export const publications: Publication[] = [
   {
+    title: '量子イノベーションハンドブック',
+    note: 'Book (共著)',
+    year: '2026',
+    link: 'https://www.nts-book.net/view/item/000000001709',
+  },
+  {
     title: 'A Practical Open-Source Software Stack for a Cloud-Based Quantum Computing System',
     note: 'IEEE QCE',
     year: '2025',
