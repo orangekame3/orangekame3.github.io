@@ -85,6 +85,13 @@ export const talks: Talk[] = [
   },
   // conference (domestic)
   {
+    title: '量子プロセッサのキャリブレーションにおけるプロベナンスデータモデルの適用と分析',
+    event: 'IPSJ HPC/QS',
+    date: '2026.03',
+    link: 'https://www.ipsj.or.jp/kenkyukai/event/hpc203qs17.html',
+    type: 'conference',
+  },
+  {
     title: '超伝導準集中定数共振器間における高強度可変結合素子の実装',
     event: '日本物理学会',
     date: '2021.03',
