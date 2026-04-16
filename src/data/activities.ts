@@ -8,6 +8,13 @@ export interface Activity {
 
 export const activities: Activity[] = [
   {
+    title: '量子ソフトウェアの社会実装を加速させる「QSRH」の挑戦',
+    org: 'クラスメソッド',
+    date: '2026.04',
+    link: 'https://classmethod.jp/cases/osaka-u-qiqb-zenn/',
+    role: '取材',
+  },
+  {
     title: 'エキスポ文化祭2025 in ららぽーとEXPOCITY',
     org: 'ららぽーとEXPOCITY',
     date: '2025.11',
