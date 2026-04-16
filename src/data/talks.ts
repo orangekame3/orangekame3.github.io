@@ -10,6 +10,14 @@ export interface Talk {
 export const talks: Talk[] = [
   // invited
   {
+    title: 'Building the Classical–Quantum Stack: What Do We Need from Each Other?',
+    event: 'COOL Chips 2026',
+    date: '2026.04',
+    link: 'https://www.coolchips.org/2026/call-for-participation/',
+    type: 'invited',
+    note: 'Panel Discussion',
+  },
+  {
     title: '量子クラウドサービスの裏側 − Deep Dive into OQTOPUS',
     event: 'IQuRA',
     date: '2026.01',
