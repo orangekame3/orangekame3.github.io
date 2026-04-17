@@ -78,5 +78,24 @@ const jsonLd = {
   </head>
   <body class="min-h-screen flex flex-col" style="background-color: var(--bg-primary); color: var(--text-primary);">
     <slot />
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('revealed');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+      );
+
+      document.querySelectorAll('main > section').forEach((section, index) => {
+        section.classList.add('reveal');
+        section.style.transitionDelay = `${index * 0.05}s`;
+        observer.observe(section);
+      });
+    </script>
   </body>
 </html>

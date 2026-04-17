@@ -3,24 +3,26 @@ import { careers } from '../data/career';
 ---
 
 <section class="py-12 sm:py-16">
-  <h2 class="text-sm sm:text-base mb-6 sm:mb-8" style="color: var(--text-tertiary);">
+  <h2 class="text-sm sm:text-base mb-6 sm:mb-8 section-heading" style="color: var(--text-tertiary);">
     <span style="color: var(--accent);">##</span> experience
   </h2>
 
   <div class="space-y-5 sm:space-y-6">
     {careers.map((career) => (
-      <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1 sm:gap-4">
-        <div class="min-w-0">
-          <h3 class="text-sm sm:text-base font-medium" style="color: var(--text-primary);">
-            {career.title}
-          </h3>
-          <p class="text-xs sm:text-sm mt-0.5 sm:mt-1" style="color: var(--text-tertiary);">
-            {career.role}
-          </p>
+      <div class="timeline-item">
+        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1 sm:gap-4">
+          <div class="min-w-0">
+            <h3 class="text-sm sm:text-base font-medium" style="color: var(--text-primary);">
+              {career.title}
+            </h3>
+            <p class="text-xs sm:text-sm mt-0.5 sm:mt-1" style="color: var(--text-tertiary);">
+              {career.role}
+            </p>
+          </div>
+          <span class="text-xs sm:text-sm shrink-0 tabular-nums" style="color: var(--text-tertiary);">
+            {career.period}
+          </span>
         </div>
-        <span class="text-xs sm:text-sm shrink-0 tabular-nums" style="color: var(--text-tertiary);">
-          {career.period}
-        </span>
       </div>
     ))}
   </div>
