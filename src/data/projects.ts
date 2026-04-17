@@ -33,6 +33,12 @@ const projectBase: Omit<Project, 'stars'>[] = [
     repo: 'oqtopus-team/qdash',
   },
   {
+    title: 'arq',
+    description: 'Local-first arXiv paper manager for reading and summarization',
+    link: 'https://github.com/orangekame3/arq',
+    repo: 'orangekame3/arq',
+  },
+  {
     title: 'qasmtools',
     description: 'Comprehensive toolkit for OpenQASM 3.0 development',
     link: 'https://github.com/orangekame3/qasmtools',
