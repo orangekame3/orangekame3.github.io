@@ -50,7 +50,7 @@ export const publications: Publication[] = [
   },
   {
     title: 'Ultrastrong Tunable Coupler Between Superconducting LC Resonators',
-    note: 'Phys. Rev. Applied',
+    note: 'Phys. Rev. Applied (first author)',
     year: '2021',
     link: 'https://journals.aps.org/prapplied/abstract/10.1103/PhysRevApplied.16.064041',
   },
