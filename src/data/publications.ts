@@ -7,6 +7,12 @@ export interface Publication {
 
 export const publications: Publication[] = [
   {
+    title: 'QuBE/Qubex: an integrated hardware-software system for superconducting qubit experiments with broadband control',
+    note: 'arXiv (co-author)',
+    year: '2026',
+    link: 'https://arxiv.org/abs/2606.13010',
+  },
+  {
     title: '量子イノベーションハンドブック',
     note: 'Book (共著)',
     year: '2026',
@@ -17,6 +23,12 @@ export const publications: Publication[] = [
     note: 'IEEE QCE',
     year: '2025',
     link: 'https://ieeexplore.ieee.org/document/11250353',
+  },
+  {
+    title: 'Auxiliary-field quantum Monte Carlo method with quantum selected configuration interaction',
+    note: 'arXiv (co-author)',
+    year: '2025',
+    link: 'https://arxiv.org/abs/2502.21081',
   },
   {
     title: '量子クラウドの待ち時間短縮：量子古典ハイブリッド実行と量子マルチプログラミング',
