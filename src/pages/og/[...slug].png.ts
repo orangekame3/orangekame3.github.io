@@ -20,7 +20,7 @@ const notoSansJpData = await fetch(
 ).then((res) => res.arrayBuffer());
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const posts = await getCollection('blog');
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
   return posts.map((post) => ({
     params: { slug: post.slug },
     props: { post },
