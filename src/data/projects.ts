@@ -11,7 +11,7 @@ export interface Project {
 const projectBase: Omit<Project, 'stars'>[] = [
   {
     title: 'OQTOPUS',
-    description: 'Open Quantum Toolchain for OPerators & USers',
+    description: 'Open-source cloud quantum computing platform',
     link: 'https://oqtopus-team.github.io/',
   },
   {
@@ -28,7 +28,7 @@ const projectBase: Omit<Project, 'stars'>[] = [
   },
   {
     title: 'qdash',
-    description: 'Large scale superconducting qubit calibration platform',
+    description: 'Automated calibration orchestration platform for superconducting quantum processors',
     link: 'https://github.com/oqtopus-team/qdash',
     repo: 'oqtopus-team/qdash',
   },

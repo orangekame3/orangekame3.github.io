@@ -17,6 +17,11 @@ const experience = careers.filter((c) => !c.role.includes('B.S.') && !c.role.inc
 const invited = talks.filter((t) => t.type === 'invited').sort((a, b) => b.date.localeCompare(a.date));
 const conference = talks.filter((t) => t.type === 'conference').sort((a, b) => b.date.localeCompare(a.date));
 const poster = talks.filter((t) => t.type === 'poster').sort((a, b) => b.date.localeCompare(a.date));
+const cvPublications = [...publications].sort((a, b) => {
+  if (a.note === 'IEEE QCE') return -1;
+  if (b.note === 'IEEE QCE') return 1;
+  return b.year.localeCompare(a.year);
+});
 
 const cvSocials = socials.filter((s) => ['email', 'linkedin', 'github'].includes(s.icon));
 ---
@@ -163,7 +168,7 @@ const cvSocials = socials.filter((s) => ['email', 'linkedin', 'github'].includes
         <span style="color: var(--accent);">##</span> Publications
       </h2>
       <ul class="space-y-1.5 text-sm" style="color: var(--text-secondary);">
-        {publications.map((pub) => (
+        {cvPublications.map((pub) => (
           <li>
             {pub.title}
             <span style="color: var(--text-tertiary);"> — {pub.note}, {pub.year}</span>
