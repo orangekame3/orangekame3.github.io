@@ -54,7 +54,6 @@ Takafumi Miyanaga (宮永崇史) is a quantum systems engineer at Osaka Universi
 
 - / - Home page with profile and latest posts
 - /blog/ - Technical blog posts (English/Japanese)
-- /daily/ - Daily journal entries
 - /cv/ - Curriculum Vitae (PDF available)
 - /talks/ - Conference talks and presentations
 

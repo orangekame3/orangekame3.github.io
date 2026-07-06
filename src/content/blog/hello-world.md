@@ -5,17 +5,10 @@ desc_ja: 最初のブログ記事です。Astroで構築した新しいブログ
 desc_en: This is my first blog post. Welcome to my new blog built with Astro.
 date: 2025-12-27
 updatedAt:
+draft: true
 ---
 
 ::en
-
-<!-- draft:
-Welcome to my blog. This is a sample post to demonstrate the blog functionality.
--->
-
-<!-- review:
-
--->
 
 Welcome to my blog. This is a sample post to demonstrate the blog functionality.
 
