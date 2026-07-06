@@ -13,7 +13,7 @@ export const skillCategories: SkillCategory[] = [
     skills: [
       'OpenQASM 3.0',
       'Superconducting Qubits',
-      'Ion-Trap Quantum Systems',
+      'Quantum Hardware Integration',
       'Cloud Quantum Computing',
       'Calibration Automation',
       'Quantum Device Operation',
