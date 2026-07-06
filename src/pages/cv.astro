@@ -1,7 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
 import { skillCategories } from '../data/skills';
 import { publications } from '../data/publications';
 import { talks } from '../data/talks';
@@ -22,250 +20,471 @@ const cvPublications = [...publications].sort((a, b) => {
   if (b.note === 'IEEE QCE') return 1;
   return b.year.localeCompare(a.year);
 });
+const cvProjects = projects.filter((p) =>
+  ['OQTOPUS', 'oqtopus-cloud', 'device-gateway', 'qdash', 'qasmtools'].includes(p.title)
+);
+const cvSummary = profile.cvSummary.filter((line) => !line.startsWith('Languages:'));
 
 const cvSocials = socials.filter((s) => ['email', 'linkedin', 'github'].includes(s.icon));
 ---
 
 <Layout title="CV - Takafumi Miyanaga | 宮永 崇史">
-  <Header />
+  <div class="cv-page">
+    <main class="cv-sheet cv-content">
+      <header class="cv-header">
+        <div>
+          <p class="cv-kicker">Curriculum Vitae</p>
+          <h1>Takafumi Miyanaga</h1>
+          <p class="cv-title">Quantum Systems Engineer & Software Developer</p>
+        </div>
+        <button onclick="window.print()" class="cv-print-button print:hidden">
+          Save as PDF
+        </button>
+      </header>
 
-  <main class="max-w-xl mx-auto px-4 sm:px-6 py-12 sm:py-16 cv-content">
-    <div class="flex justify-between items-start mb-8">
-      <div class="space-y-1">
-        <h1 class="text-lg sm:text-xl font-medium" style="color: var(--text-primary);">
-          Takafumi Miyanaga
-        </h1>
-        <div class="flex flex-wrap gap-x-3 gap-y-1 text-xs" style="color: var(--text-tertiary);">
-          {cvSocials.map((s) => (
-            <a
-              href={s.href}
-              class="hover:opacity-60 transition-opacity"
-              style="color: var(--accent);"
-            >
-              {s.name}
-            </a>
+      <div class="cv-contact">
+        {cvSocials.map((s) => (
+          <a href={s.href}>{s.name}</a>
+        ))}
+      </div>
+
+      <section class="cv-section cv-summary">
+        <h2>Professional Summary</h2>
+        <div class="cv-summary-list">
+          {cvSummary.map((line) => (
+            <p>{line}</p>
           ))}
         </div>
-      </div>
-      <button
-        onclick="window.print()"
-        class="text-xs px-3 py-1.5 rounded print:hidden hover:opacity-60 transition-opacity"
-        style="color: var(--accent); border: 1px solid var(--accent);"
-      >
-        Save as PDF
-      </button>
-    </div>
+      </section>
 
-    <div class="space-y-1 mb-8">
-      {profile.cvSummary.map((line) => (
-        <p class="text-sm" style="color: var(--text-secondary);">{line}</p>
-      ))}
-    </div>
-
-    <!-- Languages -->
-    {profile.languages && profile.languages.length > 0 && (
-      <section class="mb-8">
-        <h2 class="text-sm sm:text-base mb-3" style="color: var(--text-tertiary);">
-          <span style="color: var(--accent);">##</span> Languages
-        </h2>
-        <ul class="space-y-1.5 text-sm" style="color: var(--text-secondary);">
+      {profile.languages && profile.languages.length > 0 && (
+        <section class="cv-section">
+          <h2>Languages</h2>
+          <ul class="cv-plain-list">
           {profile.languages.map((l) => (
             <li>{l}</li>
           ))}
-        </ul>
-      </section>
-    )}
+          </ul>
+        </section>
+      )}
 
-    <!-- Experience -->
-    <section class="mb-8">
-      <h2 class="text-sm sm:text-base mb-3" style="color: var(--text-tertiary);">
-        <span style="color: var(--accent);">##</span> Experience
-      </h2>
-      <div class="space-y-4">
-        {experience.map((exp) => (
-          <div>
-            <div class="flex justify-between text-sm" style="color: var(--text-secondary);">
-              <span class="font-medium">{exp.title}, {exp.role}</span>
-              <span style="color: var(--text-tertiary);">{exp.period}</span>
+      <section class="cv-section">
+        <h2>Experience</h2>
+        <div class="cv-stack">
+          {experience.map((exp) => (
+            <article class="cv-entry">
+              <div class="cv-entry-header">
+                <div>
+                  <h3>{exp.title}</h3>
+                  <p>{exp.role}</p>
+                </div>
+                <span>{exp.period}</span>
+              </div>
+              {exp.description && (
+                <ul class="cv-bullets">
+                  {exp.description.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              )}
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section class="cv-section">
+        <h2>Skills</h2>
+        <div class="cv-skill-list">
+          {skillCategories.map((category) => (
+            <div class="cv-skill-row">
+              <span>{category.name}</span>
+              <p>{category.skills.join(', ')}</p>
             </div>
-            {exp.description && (
-              <ul class="mt-1 ml-4 space-y-0.5">
-                {exp.description.map((item) => (
-                  <li class="text-xs" style="color: var(--text-tertiary);">• {item}</li>
-                ))}
-              </ul>
-            )}
-          </div>
-        ))}
+          ))}
+        </div>
+      </section>
+
+      <section class="cv-section">
+        <h2>Selected Projects</h2>
+        <ul class="cv-projects">
+          {cvProjects.map((p) => (
+            <li>
+              <strong>{p.title}</strong>
+              <span>{p.description}</span>
+              <a href={p.link}>{p.link}</a>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="cv-section">
+        <h2>Education</h2>
+        <div class="cv-stack compact">
+          {education.map((edu) => (
+            <article class="cv-entry cv-entry-line">
+              <div>
+                <h3>{edu.title}</h3>
+                <p>{edu.role}</p>
+              </div>
+              <span>{edu.period}</span>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section class="cv-section">
+        <h2>Publications</h2>
+        <ul class="cv-publications">
+          {cvPublications.map((pub) => (
+            <li>
+              <span>{pub.title}</span>
+              <em>{pub.note}, {pub.year}</em>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {invited.length > 0 && (
+        <section class="cv-section">
+          <h2>Invited Talks</h2>
+          <ul class="cv-publications">
+            {invited.map((talk) => (
+              <li>
+                <span>{talk.title}</span>
+                <em>{talk.event}, {talk.date}</em>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {conference.length > 0 && (
+        <section class="cv-section">
+          <h2>Conference Presentations</h2>
+          <ul class="cv-publications">
+            {conference.map((talk) => (
+              <li>
+                <span>{talk.title}</span>
+                <em>{talk.event}, {talk.date}</em>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {poster.length > 0 && (
+        <section class="cv-section">
+          <h2>Poster Presentations</h2>
+          <ul class="cv-publications">
+            {poster.map((talk) => (
+              <li>
+                <span>{talk.title}</span>
+                <em>{talk.event}, {talk.date}{talk.note ? ` (${talk.note})` : ''}</em>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {service.length > 0 && (
+        <section class="cv-section">
+          <h2>Service</h2>
+          <ul class="cv-publications">
+            {service.map((s) => (
+              <li>
+                <span>{s.role}</span>
+                <em>{s.event}, {s.date}</em>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      <div class="cv-back print:hidden">
+        <a href="/">Back to home</a>
       </div>
-    </section>
-
-    <!-- Skills -->
-    <section class="mb-8">
-      <h2 class="text-sm sm:text-base mb-3" style="color: var(--text-tertiary);">
-        <span style="color: var(--accent);">##</span> Skills
-      </h2>
-      <div class="space-y-1">
-        {skillCategories.map((category) => (
-          <div class="text-sm" style="color: var(--text-secondary);">
-            <span style="color: var(--text-tertiary);">{category.name}:</span> {category.skills.join(', ')}
-          </div>
-        ))}
-      </div>
-    </section>
-
-    <!-- Projects -->
-    <section class="mb-8">
-      <h2 class="text-sm sm:text-base mb-3" style="color: var(--text-tertiary);">
-        <span style="color: var(--accent);">##</span> Projects (Selected)
-      </h2>
-      <ul class="space-y-1.5 text-sm" style="color: var(--text-secondary);">
-        {projects.map((p) => (
-          <li>
-            <span class="font-medium">{p.title}</span>
-            {p.repo && (
-              <span
-                class="tabular-nums"
-                style="color: var(--text-tertiary);"
-                title={p.stars === null ? 'Star count updates periodically' : undefined}
-              >
-                {' '}
-                ★ {typeof p.stars === 'number' ? p.stars.toLocaleString() : '—'}
-              </span>
-            )}
-            <span style="color: var(--text-tertiary);"> — {p.description}</span>
-            <span style="color: var(--text-tertiary);"> — </span>
-            <a
-              href={p.link}
-              class="hover:opacity-60 transition-opacity"
-              style="color: var(--accent);"
-            >
-              {p.link}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </section>
-
-    <!-- Education -->
-    <section class="mb-8">
-      <h2 class="text-sm sm:text-base mb-3" style="color: var(--text-tertiary);">
-        <span style="color: var(--accent);">##</span> Education
-      </h2>
-      <div class="space-y-2">
-        {education.map((edu) => (
-          <div class="flex justify-between text-sm" style="color: var(--text-secondary);">
-            <span>{edu.title}, {edu.role}</span>
-            <span style="color: var(--text-tertiary);">{edu.period}</span>
-          </div>
-        ))}
-      </div>
-    </section>
-
-    <!-- Publications -->
-    <section class="mb-8">
-      <h2 class="text-sm sm:text-base mb-3" style="color: var(--text-tertiary);">
-        <span style="color: var(--accent);">##</span> Publications
-      </h2>
-      <ul class="space-y-1.5 text-sm" style="color: var(--text-secondary);">
-        {cvPublications.map((pub) => (
-          <li>
-            {pub.title}
-            <span style="color: var(--text-tertiary);"> — {pub.note}, {pub.year}</span>
-          </li>
-        ))}
-      </ul>
-    </section>
-
-    <!-- Invited Talks -->
-    {invited.length > 0 && (
-      <section class="mb-8">
-        <h2 class="text-sm sm:text-base mb-3" style="color: var(--text-tertiary);">
-          <span style="color: var(--accent);">##</span> Invited Talks
-        </h2>
-        <ul class="space-y-1.5 text-sm" style="color: var(--text-secondary);">
-          {invited.map((talk) => (
-            <li>
-              {talk.title}
-              <span style="color: var(--text-tertiary);"> — {talk.event}, {talk.date}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
-    )}
-
-    <!-- Conference Presentations -->
-    {conference.length > 0 && (
-      <section class="mb-8">
-        <h2 class="text-sm sm:text-base mb-3" style="color: var(--text-tertiary);">
-          <span style="color: var(--accent);">##</span> Conference Presentations
-        </h2>
-        <ul class="space-y-1.5 text-sm" style="color: var(--text-secondary);">
-          {conference.map((talk) => (
-            <li>
-              {talk.title}
-              <span style="color: var(--text-tertiary);"> — {talk.event}, {talk.date}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
-    )}
-
-    <!-- Poster Presentations -->
-    {poster.length > 0 && (
-      <section class="mb-8">
-        <h2 class="text-sm sm:text-base mb-3" style="color: var(--text-tertiary);">
-          <span style="color: var(--accent);">##</span> Poster Presentations
-        </h2>
-        <ul class="space-y-1.5 text-sm" style="color: var(--text-secondary);">
-          {poster.map((talk) => (
-            <li>
-              {talk.title}
-              <span style="color: var(--text-tertiary);"> — {talk.event}, {talk.date}</span>
-              {talk.note && <span style="color: var(--accent);"> ({talk.note})</span>}
-            </li>
-          ))}
-        </ul>
-      </section>
-    )}
-
-    <!-- Service -->
-    {service.length > 0 && (
-      <section class="mb-8">
-        <h2 class="text-sm sm:text-base mb-3" style="color: var(--text-tertiary);">
-          <span style="color: var(--accent);">##</span> Service
-        </h2>
-        <ul class="space-y-1.5 text-sm" style="color: var(--text-secondary);">
-          {service.map((s) => (
-            <li>
-              {s.role}
-              <span style="color: var(--text-tertiary);"> — {s.event}, {s.date}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
-    )}
-
-    <div class="mt-12 pt-8 border-t print:hidden" style="border-color: var(--bg-secondary);">
-      <a
-        href="/"
-        class="text-sm hover:opacity-60 transition-opacity"
-        style="color: var(--accent);"
-      >
-        ← Back to home
-      </a>
-    </div>
-  </main>
-
-  <Footer />
+    </main>
+  </div>
 </Layout>
 
 <style>
+  :global(body) {
+    background: #f3f4f6 !important;
+  }
+
+  :global(.cv-page .reveal) {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .cv-page {
+    min-height: 100vh;
+    padding: 32px 16px;
+    background: #f3f4f6;
+    color: #111827;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    letter-spacing: 0;
+    line-height: 1.5;
+  }
+
+  .cv-sheet {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 56px 64px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 16px 50px rgba(15, 23, 42, 0.08);
+  }
+
+  .cv-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    align-items: flex-start;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #111827;
+  }
+
+  .cv-kicker {
+    margin: 0 0 8px;
+    color: #6b7280;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    margin: 0;
+    color: #111827;
+    font-size: 34px;
+    line-height: 1.1;
+    font-weight: 750;
+    letter-spacing: 0;
+  }
+
+  .cv-title {
+    margin: 8px 0 0;
+    color: #374151;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .cv-print-button {
+    flex: 0 0 auto;
+    padding: 8px 12px;
+    border: 1px solid #111827;
+    border-radius: 6px;
+    background: #ffffff;
+    color: #111827;
+    font-size: 12px;
+    font-weight: 650;
+    line-height: 1;
+  }
+
+  .cv-contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 18px;
+    padding: 16px 0 26px;
+    color: #2563eb;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .cv-contact a,
+  .cv-projects a,
+  .cv-back a {
+    color: #2563eb;
+    text-decoration: none;
+  }
+
+  .cv-section {
+    padding-top: 20px;
+    margin-top: 20px;
+    border-top: 1px solid #d1d5db;
+    break-inside: avoid;
+  }
+
+  .cv-summary {
+    padding-top: 0;
+    margin-top: 0;
+    border-top: 0;
+  }
+
+  .cv-section h2 {
+    margin: 0 0 12px;
+    color: #111827;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .cv-summary-list {
+    display: grid;
+    gap: 6px;
+  }
+
+  .cv-summary-list p,
+  .cv-entry p,
+  .cv-skill-row p,
+  .cv-projects span,
+  .cv-publications span,
+  .cv-publications em,
+  .cv-plain-list li {
+    margin: 0;
+    color: #374151;
+    font-size: 13px;
+  }
+
+  .cv-stack {
+    display: grid;
+    gap: 18px;
+  }
+
+  .cv-stack.compact {
+    gap: 8px;
+  }
+
+  .cv-entry-header,
+  .cv-entry-line {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    align-items: baseline;
+  }
+
+  .cv-entry h3,
+  .cv-entry-line h3 {
+    margin: 0;
+    color: #111827;
+    font-size: 14px;
+    font-weight: 750;
+    letter-spacing: 0;
+  }
+
+  .cv-entry-header span,
+  .cv-entry-line > span {
+    flex: 0 0 auto;
+    color: #6b7280;
+    font-size: 12px;
+    font-weight: 650;
+  }
+
+  .cv-bullets {
+    margin: 8px 0 0 18px;
+    padding: 0;
+    color: #374151;
+  }
+
+  .cv-bullets li {
+    margin: 3px 0;
+    padding-left: 2px;
+    color: #374151;
+    font-size: 12px;
+    line-height: 1.45;
+  }
+
+  .cv-skill-list {
+    display: grid;
+    gap: 7px;
+  }
+
+  .cv-skill-row {
+    display: grid;
+    grid-template-columns: 168px 1fr;
+    gap: 18px;
+    align-items: baseline;
+  }
+
+  .cv-skill-row > span {
+    color: #111827;
+    font-size: 12px;
+    font-weight: 750;
+  }
+
+  .cv-projects,
+  .cv-publications,
+  .cv-plain-list {
+    display: grid;
+    gap: 7px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .cv-projects li {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 4px 16px;
+    align-items: baseline;
+  }
+
+  .cv-projects strong {
+    color: #111827;
+    font-size: 13px;
+    font-weight: 750;
+  }
+
+  .cv-projects a {
+    grid-column: 2;
+    font-size: 11px;
+    overflow-wrap: anywhere;
+  }
+
+  .cv-publications li {
+    display: grid;
+    gap: 2px;
+  }
+
+  .cv-publications em {
+    color: #6b7280;
+    font-style: normal;
+    font-size: 12px;
+  }
+
+  .cv-back {
+    margin-top: 32px;
+    padding-top: 18px;
+    border-top: 1px solid #e5e7eb;
+    font-size: 13px;
+    font-weight: 650;
+  }
+
+  @media (max-width: 720px) {
+    .cv-page {
+      padding: 0;
+    }
+
+    .cv-sheet {
+      padding: 32px 22px;
+      border: 0;
+      box-shadow: none;
+    }
+
+    .cv-header,
+    .cv-entry-header,
+    .cv-entry-line {
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .cv-skill-row,
+    .cv-projects li {
+      grid-template-columns: 1fr;
+      gap: 2px;
+    }
+
+    .cv-projects a {
+      grid-column: auto;
+    }
+  }
+
   @media print {
-    :global(header),
-    :global(footer),
-    :global(.h-14) {
-      display: none !important;
+    @page {
+      size: A4;
+      margin: 12mm;
     }
 
     :global(body) {
@@ -273,26 +492,71 @@ const cvSocials = socials.filter((s) => ['email', 'linkedin', 'github'].includes
       color: black !important;
     }
 
+    .cv-page {
+      padding: 0 !important;
+      background: white !important;
+      color: black !important;
+      font-size: 11px;
+    }
+
     .cv-content {
       padding: 0 !important;
       max-width: 100% !important;
     }
 
-    .cv-content h1,
-    .cv-content h2,
-    .cv-content p,
-    .cv-content li,
-    .cv-content span,
-    .cv-content div {
-      color: black !important;
+    .cv-sheet {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding: 0 !important;
+      border: 0;
+      box-shadow: none;
     }
 
-    .cv-content h2 span {
-      color: #666 !important;
+    .cv-header {
+      padding-bottom: 12px;
     }
 
-    section {
-      break-inside: avoid;
+    .cv-contact {
+      padding: 10px 0 16px;
+    }
+
+    .cv-section {
+      padding-top: 12px;
+      margin-top: 12px;
+    }
+
+    h1 {
+      font-size: 26px;
+    }
+
+    .cv-summary-list p,
+    .cv-entry p,
+    .cv-skill-row p,
+    .cv-projects span,
+    .cv-publications span,
+    .cv-publications em,
+    .cv-plain-list li {
+      font-size: 10.5px;
+    }
+
+    .cv-bullets li {
+      font-size: 9.5px;
+      line-height: 1.25;
+      margin: 1px 0;
+    }
+
+    .cv-stack {
+      gap: 9px;
+    }
+
+    .cv-bullets {
+      margin-top: 5px;
+    }
+
+    .cv-print-button,
+    .cv-back {
+      display: none !important;
     }
   }
 </style>
