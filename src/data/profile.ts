@@ -13,11 +13,11 @@ export const profile = {
     'Operated and maintained production quantum computing systems used by external researchers through cloud access.',
     'Expertise in Go, Python, cloud infrastructure (AWS, Terraform), and production quantum system reliability, with a background in physics (M.S., superconducting quantum circuits).',
     'Active contributor to the open-source community with multiple published CLI tools and technical translations.',
-    'Languages: Japanese (native), English (professional working proficiency; publications/presentations and OSS collaboration in English).',
+    'Languages: Japanese (native), English (technical working proficiency; comfortable with professional discussions in quantum systems and software engineering).',
   ],
   languages: [
     'Japanese (Native)',
-    'English (Professional working proficiency — publications/presentations & OSS collaboration in English)',
+    'English (Technical working proficiency - comfortable with professional discussions in quantum systems and software engineering)',
   ],
   avatar: '/profile.jpg',
 };
