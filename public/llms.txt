@@ -35,6 +35,7 @@ Takafumi Miyanaga (宮永崇史) is a quantum systems engineer at Osaka Universi
 ## Publications
 
 - arXiv 2026: "QuBE/Qubex: an integrated hardware-software system for superconducting qubit experiments with broadband control"
+- Book 2026: "Quantum Innovation Handbook" (co-author, Japanese)
 - IEEE QCE 2025: "A Practical Open-Source Software Stack for a Cloud-Based Quantum Computing System"
 - arXiv 2025: "Auxiliary-field quantum Monte Carlo method with quantum selected configuration interaction"
 - Physical Review Applied 2021: "Ultrastrong Tunable Coupler Between Superconducting LC Resonators"
