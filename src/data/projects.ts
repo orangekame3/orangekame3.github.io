@@ -11,24 +11,24 @@ export interface Project {
 const projectBase: Omit<Project, 'stars'>[] = [
   {
     title: 'OQTOPUS',
-    description: 'Open-source cloud quantum computing platform',
+    description: 'Open-source cloud platform for superconducting quantum computers, spanning job execution, device integration, and user services',
     link: 'https://oqtopus-team.github.io/',
   },
   {
     title: 'oqtopus-cloud',
-    description: 'Cloud-based quantum computing platform (OQTOPUS)',
+    description: 'Cloud execution platform for quantum jobs, APIs, scheduling, and production service operations',
     link: 'https://github.com/oqtopus-team/oqtopus-cloud',
     repo: 'oqtopus-team/oqtopus-cloud',
   },
   {
     title: 'device-gateway',
-    description: 'Device gateway for quantum hardware access (OQTOPUS)',
+    description: 'Hardware access gateway bridging cloud job execution, device control, and quantum processor backends',
     link: 'https://github.com/oqtopus-team/device-gateway',
     repo: 'oqtopus-team/device-gateway',
   },
   {
     title: 'qdash',
-    description: 'Automated calibration orchestration platform for superconducting quantum processors',
+    description: 'Calibration orchestration and device health monitoring platform for superconducting quantum processors',
     link: 'https://github.com/oqtopus-team/qdash',
     repo: 'oqtopus-team/qdash',
   },
