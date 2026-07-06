@@ -1,10 +1,10 @@
 # Takafumi Miyanaga (宮永崇史)
 
-> Quantum Systems Engineer specializing in calibration automation, cloud quantum computing, and superconducting quantum computer operations
+> Quantum Systems Engineer specializing in cloud-native quantum computing systems, calibration automation, and superconducting quantum computer operations
 
 ## About
 
-Takafumi Miyanaga (宮永崇史) is a quantum systems engineer at Osaka University QIQB, specializing in calibration automation, cloud quantum computing, and superconducting quantum computer operations. He is the lead developer of OQTOPUS, an open-source software stack for cloud-based quantum computing systems, and designed QDash, an automated calibration orchestration platform for large-scale superconducting quantum processors.
+Takafumi Miyanaga (宮永崇史) is a quantum systems engineer at Osaka University QIQB, specializing in cloud-native quantum computing systems, calibration automation, and superconducting quantum computer operations. He is the lead developer of OQTOPUS, an open-source software stack for operating cloud-accessible superconducting quantum processors, including 64- and 144-qubit systems, and designed QDash, a calibration orchestration platform for large-scale superconducting quantum processors.
 
 ## Key Projects
 
@@ -16,16 +16,17 @@ Takafumi Miyanaga (宮永崇史) is a quantum systems engineer at Osaka Universi
 ## Expertise
 
 - Programming Languages: Go (Golang), Python, TypeScript/JavaScript
-- Quantum Computing: OpenQASM 3.0, Superconducting Qubits, Cloud Quantum Computing, Calibration Automation, Quantum Device Operation, Cryogenic Measurement, Quantum Benchmarking, Production Quantum Systems
-- Cloud & Infrastructure: AWS, Terraform, Docker, CI/CD, Reliability Engineering
+- Quantum Systems: Superconducting Qubits, Calibration Automation, Pulse-Level Control, Quantum Hardware Integration, Production Quantum Systems
+- Quantum Software: OpenQASM 3.0, Cloud Quantum Computing, Job Scheduling, Device Gateway, Quantum Benchmarking
+- Cloud & Infrastructure: AWS, Terraform, Docker, CI/CD, OpenTelemetry, Reliability Engineering
 - Open Source Software Development
 
 ## Education & Career
 
 - 2023 - Present: Specially Appointed Researcher, Osaka University QIQB
-  - Lead developer of OQTOPUS, an open-source cloud quantum computing platform
-  - Designed software architecture spanning cloud services, job execution, device integration, and user interfaces
-  - Developed QDash for superconducting quantum processor calibration automation
+  - Lead developer of OQTOPUS, an open-source cloud quantum computing platform supporting 64- and 144-qubit superconducting systems
+  - Designed software architecture spanning cloud APIs, job scheduling, execution backends, device gateway, user interfaces, observability, and production operations
+  - Developed QDash for superconducting quantum processor calibration orchestration
   - Operated and maintained production quantum computing systems used by external researchers through cloud access
   - Automated calibration workflows and device health monitoring to improve operational efficiency and system reliability
 - 2021 - 2023: Backend Engineer & Consultant, Future Corporation

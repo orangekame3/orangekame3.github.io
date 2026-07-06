@@ -16,14 +16,21 @@ const invited = talks.filter((t) => t.type === 'invited').sort((a, b) => b.date.
 const conference = talks.filter((t) => t.type === 'conference').sort((a, b) => b.date.localeCompare(a.date));
 const poster = talks.filter((t) => t.type === 'poster').sort((a, b) => b.date.localeCompare(a.date));
 const cvPublications = [...publications].sort((a, b) => {
-  if (a.note === 'IEEE QCE') return -1;
-  if (b.note === 'IEEE QCE') return 1;
+  if (a.note.includes('IEEE QCE')) return -1;
+  if (b.note.includes('IEEE QCE')) return 1;
   return b.year.localeCompare(a.year);
 });
 const cvProjects = projects.filter((p) =>
   ['OQTOPUS', 'oqtopus-cloud', 'device-gateway', 'qdash', 'qasmtools'].includes(p.title)
 );
 const cvSummary = profile.cvSummary.filter((line) => !line.startsWith('Languages:'));
+const cvAchievements = [
+  'Built and operated software systems for cloud-accessible 64- and 144-qubit superconducting quantum processors.',
+  'Led development of OQTOPUS, an open-source cloud quantum computing platform covering APIs, scheduling, execution, device integration, and user access.',
+  'Designed QDash, a calibration orchestration platform for superconducting quantum processors with workflow automation and device health monitoring.',
+  'Developed device gateway software bridging OpenQASM 3 execution, pulse-level control, scheduler workflows, and quantum hardware access.',
+  'Presented OQTOPUS work at IEEE Quantum Week 2025 and contributed to international talks/posters including HEART, QSMC, and Munich Quantum Software Forum.',
+];
 
 const cvSocials = socials.filter((s) => ['email', 'linkedin', 'github'].includes(s.icon));
 ---
@@ -55,6 +62,15 @@ const cvSocials = socials.filter((s) => ['email', 'linkedin', 'github'].includes
             <p>{line}</p>
           ))}
         </div>
+      </section>
+
+      <section class="cv-section">
+        <h2>Selected Achievements</h2>
+        <ul class="cv-bullets achievement-list">
+          {cvAchievements.map((achievement) => (
+            <li>{achievement}</li>
+          ))}
+        </ul>
       </section>
 
       {profile.languages && profile.languages.length > 0 && (

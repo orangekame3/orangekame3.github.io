@@ -5,31 +5,38 @@ export interface SkillCategory {
 
 export const skillCategories: SkillCategory[] = [
   {
-    name: 'Programming Languages',
+    name: 'Programming',
     skills: ['Go (Golang)', 'Python', 'TypeScript/JavaScript'],
   },
   {
-    name: 'Quantum Computing',
+    name: 'Quantum Systems',
     skills: [
-      'OpenQASM 3.0',
       'Superconducting Qubits',
-      'Quantum Hardware Integration',
-      'Cloud Quantum Computing',
-      'Calibration Automation',
       'Quantum Device Operation',
-      'Cryogenic Measurement',
-      'Quantum Benchmarking',
+      'Calibration Automation',
+      'Pulse-Level Control',
+      'Quantum Hardware Integration',
       'Production Quantum Systems',
-      'Quantum Software Development',
     ],
   },
   {
-    name: 'Cloud & Infrastructure',
+    name: 'Quantum Software',
+    skills: [
+      'OpenQASM 3.0',
+      'Cloud Quantum Computing',
+      'Job Scheduling',
+      'Device Gateway',
+      'Quantum Benchmarking',
+    ],
+  },
+  {
+    name: 'Cloud & DevOps',
     skills: [
       'Amazon Web Services (AWS)',
       'Terraform (IaC)',
       'Docker',
       'CI/CD',
+      'OpenTelemetry',
       'Linux',
       'Reliability Engineering',
     ],
