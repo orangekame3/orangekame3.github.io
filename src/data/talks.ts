@@ -18,7 +18,7 @@ export const talks: Talk[] = [
     note: 'Panel Discussion',
   },
   {
-    title: '量子クラウドサービスの裏側 − Deep Dive into OQTOPUS',
+    title: 'Behind the Scenes of Quantum Cloud Services: Deep Dive into OQTOPUS',
     event: 'IQuRA',
     date: '2026.01',
     link: 'https://www.rs.tus.ac.jp/fylab/iqura/iqura.html',
@@ -85,22 +85,22 @@ export const talks: Talk[] = [
   },
   // conference (domestic)
   {
-    title: '量子プロセッサのキャリブレーションにおけるプロベナンスデータモデルの適用と分析',
+    title: 'Application and Analysis of a Provenance Data Model for Quantum Processor Calibration',
     event: 'IPSJ HPC/QS',
     date: '2026.03',
     link: 'https://www.ipsj.or.jp/kenkyukai/event/hpc203qs17.html',
     type: 'conference',
   },
   {
-    title: '超伝導準集中定数共振器間における高強度可変結合素子の実装',
-    event: '日本物理学会',
+    title: 'Implementation of an Ultrastrong Tunable Coupler Between Superconducting Quasi-Lumped-Element Resonators',
+    event: 'The Physical Society of Japan',
     date: '2021.03',
     link: 'https://jglobal.jst.go.jp/detail?JGLOBAL_ID=202102282752761892',
     type: 'conference',
   },
   // community
   {
-    title: 'クラウド量子コンピュータシステムの開発と運用',
+    title: 'Development and Operation of a Cloud Quantum Computing System',
     event: 'OSC 2025 Osaka',
     date: '2025.01',
     link: 'https://event.ospn.jp/osc2025-osaka/',
