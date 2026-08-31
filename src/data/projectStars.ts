@@ -5,7 +5,7 @@ export const githubStars: Record<string, number | null> = {
   'oqtopus-team/qdash': 51,
   'orangekame3/arq': 3,
   'orangekame3/ghfetch': 67,
-  'orangekame3/mirrormate': 486,
+  'orangekame3/mirrormate': 489,
   'orangekame3/paclear': 237,
   'orangekame3/qasmfmt': 0,
   'orangekame3/qasmtools': 9,
